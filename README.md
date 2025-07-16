@@ -102,4 +102,10 @@ For questions, feedback, or feature requests, please open an issue in this repos
 
 ---
 
+## Release Notes
+
+Release notes for SHADOW can be found [here](https://github.com/AdvanceYourIT/SHADOW/blob/main/Release%20Notes.md).
+
+---
+
 *SHADOW is an independent project and not affiliated with NinjaOne, LLC.*
