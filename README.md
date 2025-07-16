@@ -3,6 +3,8 @@
 **SHADOW** (**S**tealthy **H**andler for **A**utomated **D**ata **O**ptimization and **W**orkflow)  
 A Microsoft Edge browser extension for fast, auditable management of NinjaOne scripts and monitoring policies, including live GitHub comparison.
 
+<img width="128" height="128" alt="shadow_128x128" src="https://github.com/user-attachments/assets/5f28a902-69eb-47b7-86d0-d0263103a35b" />
+
 ---
 
 ## Features
