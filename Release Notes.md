@@ -3,6 +3,9 @@
 ## v1.3
 
 ### New Features
+- **Template Library Compare & Update:**  
+  SHADOW now allows you to directly compare scripts in your NinjaOne environment with those available in the NinjaOne Template Library.  
+  Instantly identify missing, outdated, or changed templates and update your scripts from the template library with a single click.
 - **Improved GitHub Connection Testing:**  
   Enhanced reliability and feedback when testing the GitHub connection from the popup interface.
 - **Better Auto-Refresh for Compare:**  
