@@ -1,5 +1,35 @@
 # SHADOW – Release Notes
 
+## v1.2
+
+### New Features
+- **Encrypted GitHub Token Storage:**  
+  GitHub tokens are now securely stored using AES-GCM 256-bit encryption.
+- **Automatic Token Migration:**  
+  Plaintext tokens from previous versions are automatically migrated to encrypted storage.
+- **Comprehensive Input Validation:**  
+  All GitHub integration settings are now strictly validated and sanitized before saving.
+- **Enhanced UI Feedback:**  
+  Improved error and status messaging, with generic user-facing errors and detailed internal logging.
+- **Improved Script Injection Security:**  
+  Validation and protection against malicious or failed dynamic script injections.
+
+### Security Improvements
+- **Strict Content Security Policy:**  
+  Now includes `frame-ancestors 'none'` and reduced script/connect sources.
+- **Scoped Host Permissions:**  
+  Permissions limited to only necessary NinjaOne and GitHub API domains.
+- **Web Resource Exposure Reduced:**  
+  Sensitive scripts are no longer exposed to web pages.
+- **Selective Credential Handling:**  
+  API requests only include credentials when required.
+- **Sanitized Error Messages:**  
+  Technical details are never exposed to users or web pages.
+- **Cross-Origin Message Validation:**  
+  Only accepts and processes messages from trusted origins and with validated structure.
+
+---
+
 ## v1.1
 
 - Added live **Compare** functionality with GitHub.
