@@ -3,6 +3,13 @@
 **SHADOW** (**S**tealthy **H**andler for **A**utomated **D**ata **O**ptimization and **W**orkflow)  
 A Microsoft Edge browser extension for fast, auditable management of NinjaOne scripts and monitoring policies, including live GitHub comparison.
 
+
+
+---
+# SHADOW – Stealthy Handler for Automated Data Optimization and Workflow
+
+SHADOW is a Microsoft Edge browser extension that supercharges NinjaOne administrators with powerful, secure tools for managing, comparing, and migrating scripts and monitoring policies. SHADOW integrates directly into the NinjaOne web interface and connects seamlessly with your private GitHub repository for version control and change auditing.
+
 <img width="128" height="128" alt="shadow_128x128" src="https://github.com/user-attachments/assets/5f28a902-69eb-47b7-86d0-d0263103a35b" />
 
 ---
@@ -10,23 +17,28 @@ A Microsoft Edge browser extension for fast, auditable management of NinjaOne sc
 ## Features
 
 - **Bulk Export of Scripts & Monitoring Policies**
-  - Export all scripts or policies from NinjaOne with one click.
-  - Download as a ZIP archive for easy backup, documentation, or migration.
+  - Export all scripts or policies from NinjaOne in one click.
+  - Download as a ZIP archive for backup, migration, or documentation.
 
 - **Bulk Import of Scripts & Monitoring Policies**
-  - Import multiple scripts or policies at once using unpacked JSON files from your computer.
-  - Perfect for onboarding, migration, or updating your automation set.
+  - Import multiple scripts or policies using unpacked JSON files from your computer.
+  - Efficient for onboarding, migration, and keeping environments in sync.
 
 - **Live Compare with GitHub**
-  - Instantly compare scripts and policies in NinjaOne with versions in your private GitHub repository.
-  - See differences and keep your automation libraries aligned.
-  - _Note: SHADOW does **not** yet support restoring/importing from GitHub to NinjaOne—this is planned for future versions._
+  - Instantly compare your scripts and policies in NinjaOne with those stored in your private GitHub repository.
+  - See clear differences and keep automation libraries aligned.
+  - Note: Importing/restoring directly from GitHub to NinjaOne is planned for future releases.
 
 - **Settings Panel for GitHub Integration**
-  - Enter and save your GitHub token, repository, branch, and target path securely in the extension popup.
+  - Enter your GitHub token, repository, branch, and path in the extension popup.
+  - Secure storage and encryption for your credentials.
 
-- **Direct NinjaOne UI Integration**
+- **Direct UI Integration in NinjaOne**
   - SHADOW injects custom buttons and overlays in the NinjaOne web interface for direct access to all features.
+
+- **Advanced Security**
+  - Secure storage for sensitive data, with AES-GCM encryption for GitHub tokens.
+  - Strict permissions, comprehensive validation, and a hardened content security policy.
 
 ---
 
@@ -53,9 +65,9 @@ A Microsoft Edge browser extension for fast, auditable management of NinjaOne sc
 1. Go to **GitHub Settings** → **Developer settings** → **Personal access tokens**.
 2. Select **Tokens (classic)** or **Fine-grained tokens**.
 3. Click **Generate new token**.
-4. Give your token a clear name (e.g., `SHADOW Extension`).
+4. Name your token (e.g., `SHADOW Extension`).
 5. Set an **Expiration** as needed.
-6. **Scopes:**  
+6. **Scopes:**
     - For classic tokens: Enable at least `repo` (full control of private repositories).
     - For fine-grained tokens: Select your repository and enable `Contents: Read and Write`.
 7. Click **Generate token** and copy it securely (you won't see it again).
@@ -80,6 +92,21 @@ A Microsoft Edge browser extension for fast, auditable management of NinjaOne sc
 
 ---
 
+## Security
+
+- GitHub tokens are stored encrypted using AES-GCM and never in plaintext.
+- Strict permissions and hardened content security policy by default.
+- All user inputs are validated and sanitized.
+- For full details, see [SECURITY.md](./SECURITY.md).
+
+---
+
+## Release Notes
+
+Release notes for SHADOW can be found [here](./Release%20Notes.md).
+
+---
+
 ## Who Benefits from SHADOW?
 
 - **NinjaOne administrators** with multiple tenants or environments.
@@ -88,23 +115,9 @@ A Microsoft Edge browser extension for fast, auditable management of NinjaOne sc
 
 ---
 
-## Security Notice
-
-- Your GitHub token is stored locally and is only used by SHADOW for GitHub API access in your browser session.
-- Use private repositories for all sensitive automation code and configuration.
-- Rotate or revoke unused tokens regularly.
-
----
-
 ## Support
 
 For questions, feedback, or feature requests, please open an issue in this repository or contact the maintainer.
-
----
-
-## Release Notes
-
-Release notes for SHADOW can be found [here](https://github.com/AdvanceYourIT/SHADOW/blob/main/Release%20Notes.md).
 
 ---
 
