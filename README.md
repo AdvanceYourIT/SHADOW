@@ -16,14 +16,23 @@ SHADOW is a Microsoft Edge browser extension that supercharges NinjaOne administ
   - Import multiple scripts or policies using unpacked JSON files from your computer.
   - Efficient for onboarding, migration, and keeping environments in sync.
 
+- **Custom Fields Export & Import**
+  - Export and import custom fields for Devices, Organizations, and Locations.
+  - Ideal for migrating, backing up, or synchronizing custom metadata across NinjaOne environments.
+
 - **Live Compare with GitHub**
   - Instantly compare your scripts and policies in NinjaOne with those stored in your private GitHub repository.
   - See clear differences and keep automation libraries aligned.
+  - Optimized for large repositories, with a configurable max file limit (50–1000).
   - Note: Importing/restoring directly from GitHub to NinjaOne is planned for future releases.
 
 - **Template Library Comparison and Update**
   - Compare scripts in your NinjaOne environment with scripts available in the NinjaOne Template Library.
   - Instantly see which templates are missing, outdated, or changed, and update your environment with a single click.
+  - Now even faster, with more accurate detection and improved workflow.
+
+- **Expanded Domain Support**
+  - SHADOW now works with all NinjaOne & RMM environments worldwide (including Europe, Canada, Australia, and multi-tenant domains).
 
 - **Settings Panel for GitHub Integration**
   - Enter your GitHub token, repository, branch, and path in the extension popup.
@@ -32,9 +41,13 @@ SHADOW is a Microsoft Edge browser extension that supercharges NinjaOne administ
 - **Direct UI Integration in NinjaOne**
   - SHADOW injects custom buttons and overlays in the NinjaOne web interface for direct access to all features.
 
+- **Auto-Refresh & UX Improvements**
+  - More reliable auto-refresh after compare/upload actions, with improved feedback and smooth overlays/popups.
+
 - **Advanced Security**
   - Secure storage for sensitive data, with AES-GCM encryption for GitHub tokens.
-  - Strict permissions, comprehensive validation, and a hardened content security policy.
+  - All user inputs are strictly validated and sanitized.
+  - Strict permissions and a hardened content security policy.
 
 ---
 
