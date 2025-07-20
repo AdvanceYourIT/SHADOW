@@ -9,6 +9,8 @@
   Improved comparison and update workflow for scripts from the NinjaOne Template Library.  
   Faster detection of missing/outdated templates and one-click updates to your environment.
   - **Note:** The basic “Template Library Compare & Update” feature was introduced in v1.3; this release further improves speed, accuracy, and usability.
+- **Custom Fields Export & Import:**  
+  You can now export and import custom fields for Devices, Organizations, and Locations—making it easy to migrate, backup, or synchronize custom metadata between NinjaOne environments.
 - **Advanced GitHub Integration:**  
   Enhanced feedback and stricter input validation in the GitHub settings popup, with real-time validation and clearer error messages.
   - **Note:** Improved GitHub connection testing and user input validation were already introduced in v1.3; this release brings even stricter and more interactive validation.
