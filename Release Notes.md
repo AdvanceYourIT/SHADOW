@@ -57,7 +57,7 @@
 - **Improved GitHub Connection Testing:**  
   Enhanced reliability and feedback when testing the GitHub connection from the popup interface.
 - **Better Auto-Refresh for Compare:**  
-  Improved and more reliable auto-refresh after uploading or updating scripts and policies, ensuring the latest status is always visible.
+  Improved and more reliable auto-refresh after uploading or updating scripts, ensuring the latest status is always visible.
 - **Expanded Validation for User Inputs:**  
   Even stricter validation and sanitization for all GitHub settings fields, including more advanced edge cases and error handling for the popup UI.
 - **Performance Enhancements:**  
@@ -65,7 +65,7 @@
 - **UI/UX Improvements:**  
   Refined status messages, better accessibility, and a more modern look and feel in the popup and overlays.
 - **Improved Handling for Large GitHub Repositories:**  
-  Optimized processing and pagination when working with repositories with hundreds or thousands of scripts or policies.
+  Optimized processing and pagination when working with repositories with hundreds or thousands of scripts.
 - **Enhanced Security Controls:**  
   Security logic updated in line with recent recommendations for browser extensions and GitHub token handling (see SECURITY.md for details).
 
@@ -115,7 +115,7 @@
 
 ### New Features
 - Added live **Compare** functionality with GitHub.
-    - Instantly compare scripts and monitoring policies in NinjaOne with versions in your private GitHub repository.
+    - Instantly compare scripts in NinjaOne with versions in your private GitHub repository.
     - Visual difference highlighting and clear overview of changes.
 - Introduced a new **Settings panel** in the extension popup for entering and saving your GitHub repository, token, branch, and target path.
 - Improved user interface, both in the NinjaOne integration and in the extension popup.
@@ -128,7 +128,7 @@
 
 ### New Features
 - Initial release of SHADOW for Microsoft Edge.
-- **Bulk Export** of all scripts and monitoring policies from NinjaOne as a ZIP archive.
-- **Bulk Import** of multiple scripts or policies into NinjaOne from local unpacked JSON files.
+- **Bulk Export** of all scripts from NinjaOne as a ZIP archive.
+- **Bulk Import** of multiple scripts into NinjaOne from local unpacked JSON files.
 - Direct integration of SHADOW buttons and overlays within the NinjaOne web application.
 - Informative extension popup and streamlined workflow.
