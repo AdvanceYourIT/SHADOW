@@ -8,12 +8,12 @@ SHADOW is a Microsoft Edge browser extension that supercharges NinjaOne administ
 
 ## Features
 
-- **Bulk Export of Scripts & Monitoring Policies**
-  - Export all scripts or policies from NinjaOne in one click.
+- **Bulk Export of Scripts**
+  - Export all scripts from NinjaOne in one click.
   - Download as a ZIP archive for backup, migration, or documentation.
 
-- **Bulk Import of Scripts & Monitoring Policies**
-  - Import multiple scripts or policies using unpacked JSON files from your computer.
+- **Bulk Import of Scripts**
+  - Import multiple scripts using unpacked JSON files from your computer.
   - Efficient for onboarding, migration, and keeping environments in sync.
 
 - **Custom Fields Export & Import**
@@ -21,7 +21,7 @@ SHADOW is a Microsoft Edge browser extension that supercharges NinjaOne administ
   - Ideal for migrating, backing up, or synchronizing custom metadata across NinjaOne environments.
 
 - **Live Compare with GitHub**
-  - Instantly compare your scripts and policies in NinjaOne with those stored in your private GitHub repository.
+  - Compare your scripts in NinjaOne with those stored in your private GitHub repository.
   - See clear differences and keep automation libraries aligned.
   - Optimized for large repositories, with a configurable max file limit (50–1000).
   - Note: Importing/restoring directly from GitHub to NinjaOne is planned for future releases.
@@ -95,9 +95,9 @@ SHADOW is a Microsoft Edge browser extension that supercharges NinjaOne administ
 
 ## Typical Workflows
 
-- **Backup:** Export all scripts or monitoring policies from NinjaOne to a local ZIP archive.
-- **Bulk Update:** Import multiple scripts or policies by selecting one or more unpacked JSON files for upload to NinjaOne.
-- **Audit/Compare:** Instantly compare scripts or policies in NinjaOne with versions in your GitHub repository to identify differences and maintain consistency.
+- **Backup:** Export all scripts from NinjaOne to a local ZIP archive.
+- **Bulk Update:** Import multiple scripts by selecting one or more unpacked JSON files for upload to NinjaOne.
+- **Audit/Compare:** Compare scripts in NinjaOne with versions in your GitHub repository to identify differences and maintain consistency.
 
 ---
 
@@ -118,7 +118,7 @@ Release notes for SHADOW can be found [here](./Release%20Notes.md).
 ## Who Benefits from SHADOW?
 
 - **NinjaOne administrators** with multiple tenants or environments.
-- **IT teams and MSPs** using version control for scripts and policies.
+- **IT teams and MSPs** using version control for scripts.
 - Anyone who wants a fast, reliable, and auditable workflow for automation content in NinjaOne.
 
 ---
