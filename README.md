@@ -141,4 +141,4 @@ For questions, feedback, or feature requests, please open an issue in this repos
 
 ---
 
-*SHADOW is an independent project and not affiliated with NinjaOne, LLC.*
+*Disclaimer: This is a private, independent project and is in no way officially affiliated with, endorsed by, or sponsored by NinjaOne, Inc.*
