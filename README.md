@@ -2,18 +2,6 @@
 
 SHADOW is a Microsoft Edge browser extension that supercharges NinjaOne administrators with powerful, secure tools for managing, comparing, and migrating scripts and monitoring policies. SHADOW integrates directly into the NinjaOne web interface and connects seamlessly with your private GitHub repository for version control and change auditing.
 
-## Why I Created SHADOW
-
-SHADOW started from my own frustration with the tedious and error-prone process of manually managing scripts and custom fields in NinjaOne—especially without any real version control. Initially, I built a small PowerShell script just to make life easier for myself. But as my needs grew and I saw the same struggles in the NinjaOne admin community, I realized this could be so much more.
-
-The extension has grown into a tool that allows any administrator to effortlessly export and import scripts and all their related custom fields as JSON, saving hours of manual work. Now, you can share scripts—including their dependencies—across your team or the broader community, making collaboration and onboarding much simpler.
-
-One of the things I’m most proud of is the seamless GitHub integration: you can export your scripts straight to a repository for version control, and just as easily import them back into your NinjaOne environment. This not only improves security and tracking but also empowers teams to build a true automation workflow around NinjaOne.
-
-SHADOW is my way of turning daily admin frustrations into real, sustainable solutions for myself and for everyone working with NinjaOne.
-
----
-
 <img width="128" height="128" alt="shadow_128x128" src="https://github.com/user-attachments/assets/5f28a902-69eb-47b7-86d0-d0263103a35b" />
 
 ---
@@ -142,3 +130,5 @@ For questions, feedback, or feature requests, please open an issue in this repos
 ---
 
 *Disclaimer: This is a private, independent project and is in no way officially affiliated with, endorsed by, or sponsored by NinjaOne, Inc.*
+
+Use at your own risk.
