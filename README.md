@@ -34,6 +34,10 @@ SHADOW is a Microsoft Edge browser extension that supercharges NinjaOne administ
   - Optimized for large repositories, with a configurable max file limit (50–1000).
   - Note: Importing/restoring directly from GitHub to NinjaOne is planned for future releases.
 
+- **Bulk Policy Assignment**
+  - Assign a selected policy in bulk to a device role.
+  - No more going through each organization to change the policy for a device role.
+
 - **Template Library Comparison and Update**
   - Compare scripts in your NinjaOne environment with scripts available in the NinjaOne Template Library.
   - Instantly see which templates are missing, outdated, or changed, and update your environment with a single click.
