@@ -6,6 +6,14 @@ SHADOW is a Microsoft Edge browser extension that supercharges NinjaOne administ
 
 ---
 
+## **Version 1.0.9 released!**
+
+- Console logging reduced.
+- Option added to Assign a policy to a device role in bulk.
+
+<img width="832" height="739" alt="bulkpolicyassignment" src="https://github.com/user-attachments/assets/f2d65b95-35ea-4d99-acae-b0238a17f0b1" />
+
+
 ## Features
 
 - **Bulk Export of Scripts**
