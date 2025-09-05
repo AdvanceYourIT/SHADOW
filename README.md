@@ -29,6 +29,9 @@ SHADOW is a Microsoft Edge browser extension that supercharges NinjaOne administ
   - Ideal for migrating, backing up, or synchronizing custom metadata across NinjaOne environments.
 
 - **Live Compare with GitHub**
+
+  <img width="640" height="400" alt="shadowbackup" src="https://github.com/user-attachments/assets/4537e643-213e-46d2-a67b-6fe899ab46c0" />
+  
   - Compare your scripts in NinjaOne with those stored in your private GitHub repository.
   - See clear differences and keep automation libraries aligned.
   - Optimized for large repositories, with a configurable max file limit (50–1000).
