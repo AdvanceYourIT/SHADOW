@@ -4,6 +4,10 @@ SHADOW is a Microsoft Edge browser extension that supercharges NinjaOne administ
 
 <img width="128" height="128" alt="shadow_128x128" src="https://github.com/user-attachments/assets/5f28a902-69eb-47b7-86d0-d0263103a35b" />
 
+*Disclaimer: This is a private, independent project and is in no way officially affiliated with, endorsed by, or sponsored by NinjaOne, Inc.*
+
+Use at your own risk.
+
 ---
 
 ## **Version 1.0.9 released!**
