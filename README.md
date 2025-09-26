@@ -10,63 +10,65 @@ Use at your own risk.
 
 ---
 
-## **Version 1.0.9 released!**
+## **Version 1.1.1 released!**
 
-- Console logging reduced.
-- Option added to Assign a policy to a device role in bulk.
-
-<img width="832" height="739" alt="bulkpolicyassignment" src="https://github.com/user-attachments/assets/f2d65b95-35ea-4d99-acae-b0238a17f0b1" />
-
+- **Deep GitHub diff & sync workflow.** The in-product comparison overlay now handles both script and JSON assets with status filters, inline diffs, bulk upload queues, and one-click imports from GitHub (complete with category selection and multi-language extension mapping).
+- **Safer import guardrails.** SHADOW tracks the last backup you performed and blocks script or field imports until a same-day backup is on record, with friendly prompts that explain how to proceed.
+- **Smarter ITAM batching.** Unmanaged device deployments continue to support curated parent/child templates, icon detection, and MFA-friendly batch pauses so large rollouts stay reliable.
 
 ## Features
 
-- **Bulk Export of Scripts**
-  - Export all scripts from NinjaOne in one click.
-  - Download as a ZIP archive for backup, migration, or documentation.
+### Script & GitHub Automation
+- **Download Scripts / Download Scripts (JSON)** – Export your entire NinjaOne script library as either PowerShell packages or raw JSON archives with SHA-validated payloads for compliance, cold storage, or tenant migrations.
+- **Import Scripts from JSON** – Queue any number of SHADOW exports for re-import, automatically assign them to the SHADOW script category, and skip unsupported languages while respecting the backup guardrails.
+- **Compare with GitHub** – Launch a full-screen diff overlay that progressively loads large libraries (50–1000 files), highlights status buckets, filters results, previews inline diffs, and queues uploads per detected language/extension.
+- **Import from GitHub** – Browse the connected repository directly inside NinjaOne, multi-select PS1/SH/BAT/JS/VBS/PY/CMD/JSON assets, choose a destination category (or preserve source categories), and import them in bulk with progress feedback and auto-refresh.
 
-- **Bulk Import of Scripts**
-  - Import multiple scripts using unpacked JSON files from your computer.
-  - Efficient for onboarding, migration, and keeping environments in sync.
+### Template Library Sync
+- **Compare Templates** – Analyse your environment against the official NinjaOne Template Library, review the remediation list, and optionally apply or skip updates with confirmation prompts.
 
-- **Custom Fields Export & Import**
-  - Export and import custom fields for Devices, Organizations, and Locations.
-  - Ideal for migrating, backing up, or synchronizing custom metadata across NinjaOne environments.
+### Custom Fields & Metadata
+- **Device Custom Fields – Export / Import** – Back up device-level metadata or restore field definitions from JSON exports, with per-file validation and backup enforcement.
+- **Organization Custom Fields – Export / Import** – Move customer-specific metadata between tenants and ensure the definitions stay consistent across environments.
+- **Location Custom Fields – Export / Import** – Keep branch/location data aligned by exporting and re-importing standardized definitions with a single click.
 
-- **Live Compare with GitHub**
+### Policy, Backup & Compliance Operations
+- **Backup Now** – Run a full backup from the System Dashboard that collects scripts and custom fields, applies automatic path sanitisation, honours the “force local backup” setting, and uses hardened, rate-limited GitHub writes.
 
-  <img width="640" height="400" alt="shadowbackup" src="https://github.com/user-attachments/assets/4537e643-213e-46d2-a67b-6fe899ab46c0" />
-  
-  - Compare your scripts in NinjaOne with those stored in your private GitHub repository.
-  - See clear differences and keep automation libraries aligned.
-  - Optimized for large repositories, with a configurable max file limit (50–1000).
-  - Note: Importing/restoring directly from GitHub to NinjaOne is planned for future releases.
+<img width="640" height="400" alt="shadowbackup" src="https://github.com/user-attachments/assets/4537e643-213e-46d2-a67b-6fe899ab46c0" />
 
-- **Bulk Policy Assignment**
-  - Assign a selected policy in bulk to a device role.
-  - No more going through each organization to change the policy for a device role.
+- **Bulk Policy Assignment** – Apply a monitoring policy to a selected device role across every organisation at once via an overlay that supports progressive loading, select-all toggles, and real-time success/error reporting.
 
-- **Template Library Comparison and Update**
-  - Compare scripts in your NinjaOne environment with scripts available in the NinjaOne Template Library.
-  - Instantly see which templates are missing, outdated, or changed, and update your environment with a single click.
-  - Now even faster, with more accurate detection and improved workflow.
+<img width="832" height="739" alt="bulkpolicyassignment" src="https://github.com/user-attachments/assets/f2d65b95-35ea-4d99-acae-b0238a17f0b1" />
 
-- **Expanded Domain Support**
-  - SHADOW now works with all NinjaOne & RMM environments worldwide (including Europe, Canada, Australia, and multi-tenant domains).
+- **Backup Security Overlay** – Track when backups were completed, view the daily status, and require a same-day backup before any script or field import can proceed.
 
-- **Settings Panel for GitHub Integration**
-  - Enter your GitHub token, repository, branch, and path in the extension popup.
-  - Secure storage and encryption for your credentials.
+### IT Asset Management (ITAM) Templates
+- **Add Unmanaged Devices** – Open an overlay with curated ITAM parent/child templates grouped by technology stack, preview icon matches from your existing tenant, and queue role creation with automatic batching, countdown pauses, and resume prompts that avoid MFA lockouts.
+- **Import Unmanaged Devices** – Load JSON template files generated by SHADOW to reproduce complex ITAM role structures in new tenants while reusing stored custom fields and hierarchy metadata.
+- **Export Unmanaged Devices** – Capture your current unmanaged-role definitions as JSON for audit trails, change reviews, or peer sharing.
+- Automations include smart batching, MFA-friendly pauses, resume prompts, and clear success/error toasts to keep long deployments reliable.
 
-- **Direct UI Integration in NinjaOne**
-  - SHADOW injects custom buttons and overlays in the NinjaOne web interface for direct access to all features.
+### Global Coverage & Secure Workflows
+- Works with every NinjaOne domain worldwide (Europe, Canada, Australia, multi-tenant, and more).
+- Buttons, overlays, and settings are injected directly in the NinjaOne UI with streamlined refresh handling for a smooth operator experience.
+- All automation respects strict security practices with validated inputs, encrypted credential storage, secure GitHub rate limiting, and migration helpers that remove any legacy plaintext tokens.
 
-- **Auto-Refresh & UX Improvements**
-  - More reliable auto-refresh after compare/upload actions, with improved feedback and smooth overlays/popups.
+## Button Reference Inside NinjaOne
 
-- **Advanced Security**
-  - Secure storage for sensitive data, with AES-GCM encryption for GitHub tokens.
-  - All user inputs are strictly validated and sanitized.
-  - Strict permissions and a hardened content security policy.
+| NinjaOne area | Buttons added by SHADOW | What they do |
+| --- | --- | --- |
+| **Administration ▸ Library ▸ Scripting ▸ Scripts** | Download Scripts · Download Scripts (JSON) · Import Scripts from JSON · Compare with GitHub | Export scripts as PowerShell or JSON archives, import JSON exports back into NinjaOne, or launch the GitHub diff viewer to audit live vs. version-controlled code. |
+| **Administration ▸ Library ▸ Scripting ▸ Template Library** | Compare Templates | Check your tenant against the official Template Library and optionally apply updated templates. |
+| **System Dashboard ▸ Overview** | Backup Now | Trigger a full backup of scripts and custom fields to GitHub (or force a local ZIP download when configured) with automatic sanitization and hardened GitHub writes. |
+| **Administration ▸ Library ▸ Automation** | Download Scripts · Download Scripts (JSON) · Import Scripts from JSON · Compare with GitHub | Export scripts as PowerShell or JSON archives, import JSON exports back into NinjaOne, or launch the GitHub diff viewer to audit live vs. version-controlled code. |
+| **Administration ▸ Library ▸ Automation ▸ Template Library** | Compare Templates | Check your tenant against the official Template Library and optionally apply updated templates. |
+| **System Dashboard ▸ Overview** | Backup Now | Trigger a full backup of scripts and custom fields to GitHub (or force a local ZIP download when configured). |
+| **Administration ▸ Devices ▸ Device Custom Fields** | Export · Import | Save device custom field definitions to JSON or restore them from a backup. |
+| **Administration ▸ Customers ▸ Organization Custom Fields** | Export · Import | Migrate organization-level custom fields between tenants or back them up safely. |
+| **Administration ▸ Customers ▸ Location Custom Fields** | Export · Import | Export or import location-specific custom fields in bulk. |
+| **Administration ▸ Customers ▸ Organizations** | Bulk Policy Assignment | Assign a monitoring policy to a device role for every organization at once. |
+| **Administration ▸ Devices ▸ Roles (Unmanaged)** | Add Unmanaged Devices · Import Unmanaged Devices · Export Unmanaged Devices | Launch the ITAM template overlay to create curated unmanaged roles, import JSON template packs, or export your current unmanaged-role structure for reuse. |
 
 ---
 
@@ -108,15 +110,38 @@ Use at your own risk.
     - Repository (e.g., `username/ninjaone-scripts`)
     - Branch (e.g., `main`)
     - (Optional) Path (subfolder in your repo)
-3. Test and save your settings.
+    - Max files to process (defaults to 300; allowed range 50–1000)
+    - Auto-refresh comparison after upload (enable to reload the diff overlay automatically)
+    - Force local backup (skip GitHub upload and always download ZIPs locally)
+    - Enable debug logging (optional troubleshooting switch that redacts secrets)
+3. Click **Test Connection** and review the success banner, then choose **Save Settings** to persist your preferences.
+4. If anything looks off, SHADOW now highlights the exact field that needs attention before encrypting and storing your GitHub details.
+
+## Extension Popup Settings
+
+| Control | Purpose |
+| --- | --- |
+| **GitHub token** | Stored encrypted with AES-GCM so the extension can authenticate to your private repository. |
+| **Repository** | Accepts `owner/repo` or a full HTTPS URL; determines where backups and comparisons read/write data. |
+| **Branch** | Defaults to `main`, but can target any branch that contains your automation assets. |
+| **Path (optional)** | Limits operations to a specific folder within the repository (leave blank for the repo root). |
+| **Max files to process** | Caps GitHub comparison scope (50–1000). Use a lower value for faster diff sessions on large repos. |
+| **Auto-refresh comparison after upload** | When enabled, the GitHub diff overlay reloads automatically after pushing updates. |
+| **Force local backup (skip GitHub upload)** | Overrides uploads and always downloads a ZIP to your machine—ideal for air-gapped backups. |
+| **Test Connection** | Validates the token, repository, and branch before you run exports or backups. |
+| **Save Settings** | Validates and sanitizes GitHub fields before persisting preferences and checkbox selections for future sessions. |
+| **Enable debug logging** | Toggles additional console diagnostics (with secrets redacted) under the Debug heading of the popup. |
 
 ---
 
 ## Typical Workflows
 
-- **Backup:** Export all scripts from NinjaOne to a local ZIP archive.
+- **Backup:** Export all scripts from NinjaOne to a local ZIP archive or your GitHub repository via the Backup Now button, benefitting from automatic path sanitization and secure GitHub API writes.
 - **Bulk Update:** Import multiple scripts by selecting one or more unpacked JSON files for upload to NinjaOne.
 - **Audit/Compare:** Compare scripts in NinjaOne with versions in your GitHub repository to identify differences and maintain consistency.
+- **Custom Field Migration:** Export device, organization, or location custom fields from one tenant and import them into another.
+- **Policy Rollout:** Apply a monitoring policy to a device role across every organization with Bulk Policy Assignment.
+- **ITAM Template Deployment:** Use the unmanaged-device overlays to add curated templates, or import/export JSON packs to keep roles aligned across tenants.
 
 ---
 
@@ -124,13 +149,9 @@ Use at your own risk.
 
 - GitHub tokens are stored encrypted using AES-GCM and never in plaintext.
 - Strict permissions and hardened content security policy by default.
-- All user inputs are validated and sanitized.
-
----
-
-## Release Notes
-
-Release notes for SHADOW can be found [here](./Release%20Notes.md).
+- All user inputs—including repository names, folder selections, and file paths—are sanitized before any GitHub call is attempted.
+- Every GitHub read/write flows through the secure wrapper with token validation, rate-limited requests, and hardened error handling to prevent misuse or credential leakage.
+- Bulk backup uploads validate each generated destination path and abort safely if sanitization fails, keeping your repository free of unexpected files.
 
 ---
 
