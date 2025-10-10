@@ -10,11 +10,11 @@ Use at your own risk.
 
 ---
 
-## **Version 1.1.1 released!**
+## **Version 1.1.2 released!**
 
-- **Deep GitHub diff & sync workflow.** The in-product comparison overlay now handles both script and JSON assets with status filters, inline diffs, bulk upload queues, and one-click imports from GitHub (complete with category selection and multi-language extension mapping).
-- **Safer import guardrails.** SHADOW tracks the last backup you performed and blocks script or field imports until a same-day backup is on record, with friendly prompts that explain how to proceed.
-- **Smarter ITAM batching.** Unmanaged device deployments continue to support curated parent/child templates, icon detection, and MFA-friendly batch pauses so large rollouts stay reliable.
+- **OBVIOUS Template Library integration.** Launch the new OBVIOUS Template Library (Operational Bundles of Valuable IT Operations Utility Scripts) overlay to browse curated manifest-driven packages, cherry-pick templates, and import their scripts plus related custom fields with checksum validation and backup awareness. Because finding the template library should be OBVIOUS for everyone.
+- **Improved manifest tooling.** Progress overlays now surface per-package status, highlight skipped templates, and summarize successes, failures, and backup prerequisites for faster remediation inside NinjaOne.
+- **Reliability refinements.** Background-assisted GitHub fetches, smarter language handling, and better error messaging keep large-scale template imports resilient even when MFA prompts or rate limits appear.
 
 ## Features
 
@@ -26,6 +26,7 @@ Use at your own risk.
 
 ### Template Library Sync
 - **Compare Templates** – Analyse your environment against the official NinjaOne Template Library, review the remediation list, and optionally apply or skip updates with confirmation prompts.
+- **OBVIOUS Template Library** – Retrieve curated packages from `AdvanceYourIT/SHADOW-Templates`, validate checksums, and import scripts plus related custom fields directly inside NinjaOne using the Operational Bundles of Valuable IT Operations Utility Scripts workflow.
 
 ### Custom Fields & Metadata
 - **Device Custom Fields – Export / Import** – Back up device-level metadata or restore field definitions from JSON exports, with per-file validation and backup enforcement.
@@ -58,12 +59,10 @@ Use at your own risk.
 
 | NinjaOne area | Buttons added by SHADOW | What they do |
 | --- | --- | --- |
-| **Administration ▸ Library ▸ Scripting ▸ Scripts** | Download Scripts · Download Scripts (JSON) · Import Scripts from JSON · Compare with GitHub | Export scripts as PowerShell or JSON archives, import JSON exports back into NinjaOne, or launch the GitHub diff viewer to audit live vs. version-controlled code. |
-| **Administration ▸ Library ▸ Scripting ▸ Template Library** | Compare Templates | Check your tenant against the official Template Library and optionally apply updated templates. |
 | **System Dashboard ▸ Overview** | Backup Now | Trigger a full backup of scripts and custom fields to GitHub (or force a local ZIP download when configured) with automatic sanitization and hardened GitHub writes. |
+| **Administration ▸ Library ▸ Scripting ▸ Scripts** | Download Scripts · Download Scripts (JSON) · Import Scripts from JSON · Compare with GitHub | Export scripts as PowerShell or JSON archives, import JSON exports back into NinjaOne, or launch the GitHub diff viewer to audit live vs. version-controlled code. |
+| **Administration ▸ Library ▸ Template Library (Scripting & Automation)** | Compare Templates · OBVIOUS Template Library | Check your tenant against the official Template Library or import curated packs from the public SHADOW Templates repository. |
 | **Administration ▸ Library ▸ Automation** | Download Scripts · Download Scripts (JSON) · Import Scripts from JSON · Compare with GitHub | Export scripts as PowerShell or JSON archives, import JSON exports back into NinjaOne, or launch the GitHub diff viewer to audit live vs. version-controlled code. |
-| **Administration ▸ Library ▸ Automation ▸ Template Library** | Compare Templates | Check your tenant against the official Template Library and optionally apply updated templates. |
-| **System Dashboard ▸ Overview** | Backup Now | Trigger a full backup of scripts and custom fields to GitHub (or force a local ZIP download when configured). |
 | **Administration ▸ Devices ▸ Device Custom Fields** | Export · Import | Save device custom field definitions to JSON or restore them from a backup. |
 | **Administration ▸ Customers ▸ Organization Custom Fields** | Export · Import | Migrate organization-level custom fields between tenants or back them up safely. |
 | **Administration ▸ Customers ▸ Location Custom Fields** | Export · Import | Export or import location-specific custom fields in bulk. |
