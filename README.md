@@ -10,6 +10,12 @@ Use at your own risk.
 
 ---
 
+## **Version 1.1.3 released!**
+
+- **Compare uploads match backups.** The Compare with GitHub overlay now uploads JSON exports that mirror **Backup Now** outputs, including scriptVariables and other metadata so GitHub repositories stay perfectly aligned.
+- **Safer JSON reconstruction.** Script metadata is refreshed on demand and raw code is preserved during compare-mode exports, preventing missing variables or truncated content in uploaded files.
+- **Documentation refresh.** Updated release notes to highlight the compare workflow parity and reliability fixes included in 1.1.3.
+
 ## **Version 1.1.2 released!**
 
 - **OBVIOUS Template Library integration.** Launch the new OBVIOUS Template Library (Operational Bundles of Valuable IT Operations Utility Scripts) overlay to browse curated manifest-driven packages, cherry-pick templates, and import their scripts plus related custom fields with checksum validation and backup awareness. Because finding the template library should be OBVIOUS for everyone.
@@ -21,7 +27,7 @@ Use at your own risk.
 ### Script & GitHub Automation
 - **Download Scripts / Download Scripts (JSON)** – Export your entire NinjaOne script library as either PowerShell packages or raw JSON archives with SHA-validated payloads for compliance, cold storage, or tenant migrations.
 - **Import Scripts from JSON** – Queue any number of SHADOW exports for re-import, automatically assign them to the SHADOW script category, and skip unsupported languages while respecting the backup guardrails.
-- **Compare with GitHub** – Launch a full-screen diff overlay that progressively loads large libraries (50–1000 files), highlights status buckets, filters results, previews inline diffs, and queues uploads per detected language/extension.
+- **Compare with GitHub** – Launch a full-screen diff overlay that progressively loads large libraries (50–1000 files), highlights status buckets, filters results, previews inline diffs, and queues uploads per detected language/extension. JSON uploads now mirror **Backup Now** outputs, preserving script variables/parameters so GitHub exports stay identical to local backups.
 - **Import from GitHub** – Browse the connected repository directly inside NinjaOne, multi-select PS1/SH/BAT/JS/VBS/PY/CMD/JSON assets, choose a destination category (or preserve source categories), and import them in bulk with progress feedback and auto-refresh.
 
 ### Template Library Sync
