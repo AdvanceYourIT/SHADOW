@@ -10,6 +10,12 @@ Use at your own risk.
 
 ---
 
+## **Version 1.1.4 released!**
+
+- **Used Scripts visibility.** A new Used Scripts button on the Scripts page surfaces every policy condition, scheduled task, or system tray menu item that references your scripts so you can quickly see where each automation is deployed.
+- **Unused Scripts overlay.** A new button on the Scripts page now opens an overlay that highlights scripts not currently in use across policies, scheduled tasks, and system tray configurations, making it easy to review and export what can be cleaned up.
+- **NinjaRemote Confirmation Audit overlay.** A new **NinjaRemote Confirmation Audit** button on Device Search opens an overlay that evaluates effective Ask Confirmation against organization defaults, shows Organization/Location plus Effective/Override columns, supports Select All/Select None/Refresh with a Hide Inherited filter, exports CSV, and offers **Reset Selected to Org Defaults** remediation.
+
 ## **Version 1.1.3 released!**
 
 - **Compare uploads match backups.** The Compare with GitHub overlay now uploads JSON exports that mirror **Backup Now** outputs, including scriptVariables and other metadata so GitHub repositories stay perfectly aligned.
@@ -40,6 +46,8 @@ Use at your own risk.
 - **Location Custom Fields – Export / Import** – Keep branch/location data aligned by exporting and re-importing standardized definitions with a single click.
 
 ### Policy, Backup & Compliance Operations
+- **NinjaRemote Confirmation Audit (Device Search)** – Open the NinjaRemote Confirmation Audit overlay from Device Search to detect workstations where effective remote confirmation resolves to false, review organization/location plus Effective/Override context, optionally hide inherited rows, export CSV findings, and reset selected devices to organization defaults.
+
 - **Backup Now** – Run a full backup from the System Dashboard that collects scripts and custom fields, applies automatic path sanitisation, honours the “force local backup” setting, and uses hardened, rate-limited GitHub writes.
 
 <img width="640" height="400" alt="shadowbackup" src="https://github.com/user-attachments/assets/4537e643-213e-46d2-a67b-6fe899ab46c0" />
@@ -66,13 +74,13 @@ Use at your own risk.
 | NinjaOne area | Buttons added by SHADOW | What they do |
 | --- | --- | --- |
 | **System Dashboard ▸ Overview** | Backup Now | Trigger a full backup of scripts and custom fields to GitHub (or force a local ZIP download when configured) with automatic sanitization and hardened GitHub writes. |
-| **Administration ▸ Library ▸ Scripting ▸ Scripts** | Download Scripts · Download Scripts (JSON) · Import Scripts from JSON · Compare with GitHub | Export scripts as PowerShell or JSON archives, import JSON exports back into NinjaOne, or launch the GitHub diff viewer to audit live vs. version-controlled code. |
 | **Administration ▸ Library ▸ Template Library (Scripting & Automation)** | Compare Templates · OBVIOUS Template Library | Check your tenant against the official Template Library or import curated packs from the public SHADOW Templates repository. |
-| **Administration ▸ Library ▸ Automation** | Download Scripts · Download Scripts (JSON) · Import Scripts from JSON · Compare with GitHub | Export scripts as PowerShell or JSON archives, import JSON exports back into NinjaOne, or launch the GitHub diff viewer to audit live vs. version-controlled code. |
+| **Administration ▸ Library ▸ Automation** | Download Scripts · Download Scripts (JSON) · Import Scripts from JSON · Compare with GitHub · Unused Scripts · Used Scripts | Export scripts as PowerShell or JSON archives, import JSON exports back into NinjaOne, launch the GitHub diff viewer to audit live vs. version-controlled code, or review where scripts are used (or unused) across policies, scheduled tasks, and system tray configurations. |
 | **Administration ▸ Devices ▸ Device Custom Fields** | Export · Import | Save device custom field definitions to JSON or restore them from a backup. |
 | **Administration ▸ Customers ▸ Organization Custom Fields** | Export · Import | Migrate organization-level custom fields between tenants or back them up safely. |
 | **Administration ▸ Customers ▸ Location Custom Fields** | Export · Import | Export or import location-specific custom fields in bulk. |
 | **Administration ▸ Customers ▸ Organizations** | Bulk Policy Assignment | Assign a monitoring policy to a device role for every organization at once. |
+| **Device Search** | NinjaRemote Confirmation Audit | Audit Windows workstations where effective Ask Confirmation resolves to false, view Organization/Location plus Effective/Override columns, optionally hide inherited rows, export CSV, and reset selected devices to org defaults. |
 | **Administration ▸ Devices ▸ Roles (Unmanaged)** | Add Unmanaged Devices · Import Unmanaged Devices · Export Unmanaged Devices | Launch the ITAM template overlay to create curated unmanaged roles, import JSON template packs, or export your current unmanaged-role structure for reuse. |
 
 ---
