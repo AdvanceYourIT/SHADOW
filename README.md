@@ -10,31 +10,20 @@ Use at your own risk.
 
 ---
 
-## **Version 1.1.4 released!**
+## **Version 1.1.5 released!**
 
-- **Used Scripts visibility.** A new Used Scripts button on the Scripts page surfaces every policy condition, scheduled task, or system tray menu item that references your scripts so you can quickly see where each automation is deployed.
-- **Unused Scripts overlay.** A new button on the Scripts page now opens an overlay that highlights scripts not currently in use across policies, scheduled tasks, and system tray configurations, making it easy to review and export what can be cleaned up.
-- **NinjaRemote Confirmation Audit overlay.** A new **NinjaRemote Confirmation Audit** button on Device Search opens an overlay that evaluates effective Ask Confirmation against organization defaults, shows Organization/Location plus Effective/Override columns, supports Select All/Select None/Refresh with a Hide Inherited filter, exports CSV, and offers **Reset Selected to Org Defaults** remediation.
-
-## **Version 1.1.3 released!**
-
-- **Compare uploads match backups.** The Compare with GitHub overlay now uploads JSON exports that mirror **Backup Now** outputs, including scriptVariables and other metadata so GitHub repositories stay perfectly aligned.
-- **Safer JSON reconstruction.** Script metadata is refreshed on demand and raw code is preserved during compare-mode exports, preventing missing variables or truncated content in uploaded files.
-- **Documentation refresh.** Updated release notes to highlight the compare workflow parity and reliability fixes included in 1.1.3.
-
-## **Version 1.1.2 released!**
-
-- **OBVIOUS Template Library integration.** Launch the new OBVIOUS Template Library (Operational Bundles of Valuable IT Operations Utility Scripts) overlay to browse curated manifest-driven packages, cherry-pick templates, and import their scripts plus related custom fields with checksum validation and backup awareness. Because finding the template library should be OBVIOUS for everyone.
-- **Improved manifest tooling.** Progress overlays now surface per-package status, highlight skipped templates, and summarize successes, failures, and backup prerequisites for faster remediation inside NinjaOne.
-- **Reliability refinements.** Background-assisted GitHub fetches, smarter language handling, and better error messaging keep large-scale template imports resilient even when MFA prompts or rate limits appear.
+- **GitHub backup failedFiles response.** Successful GitHub backup uploads now include a `failedFiles` list in the success response (not only counters), allowing the UI to surface exactly which files did not upload.
+- **Actionable partial-upload feedback.** Backup success alerts now list failed files directly (up to 10 entries) and append an '...and X more' line when needed, making partial-upload troubleshooting much faster.
+- **Standardized category handling in compare/sync.** Compare import/update paths now use `resolveCategoriesIds(...)` so existing `categoriesIds` are preserved and fallback category assignment is only used when source categories are missing.
+- **Safer import category behavior.** JSON import no longer blindly overwrites categories with SHADOW; it now normalizes and preserves valid source categories, and only assigns SHADOW when no valid category exists.
 
 ## Features
 
 ### Script & GitHub Automation
 - **Download Scripts / Download Scripts (JSON)** – Export your entire NinjaOne script library as either PowerShell packages or raw JSON archives with SHA-validated payloads for compliance, cold storage, or tenant migrations.
-- **Import Scripts from JSON** – Queue any number of SHADOW exports for re-import, automatically assign them to the SHADOW script category, and skip unsupported languages while respecting the backup guardrails.
+- **Import Scripts from JSON** – Queue any number of SHADOW exports for re-import, preserve valid source category mappings when present, and only assign the SHADOW category when category data is missing, while skipping unsupported languages and respecting backup guardrails.
 - **Compare with GitHub** – Launch a full-screen diff overlay that progressively loads large libraries (50–1000 files), highlights status buckets, filters results, previews inline diffs, and queues uploads per detected language/extension. JSON uploads now mirror **Backup Now** outputs, preserving script variables/parameters so GitHub exports stay identical to local backups.
-- **Import from GitHub** – Browse the connected repository directly inside NinjaOne, multi-select PS1/SH/BAT/JS/VBS/PY/CMD/JSON assets, choose a destination category (or preserve source categories), and import them in bulk with progress feedback and auto-refresh.
+- **Import from GitHub** – Browse the connected repository directly inside NinjaOne, multi-select PS1/SH/BAT/JS/VBS/CMD/JSON assets, choose a destination category (or preserve source categories), and import them in bulk with progress feedback and auto-refresh.
 
 ### Template Library Sync
 - **Compare Templates** – Analyse your environment against the official NinjaOne Template Library, review the remediation list, and optionally apply or skip updates with confirmation prompts.
@@ -123,7 +112,7 @@ Use at your own risk.
     - Repository (e.g., `username/ninjaone-scripts`)
     - Branch (e.g., `main`)
     - (Optional) Path (subfolder in your repo)
-    - Max files to process (defaults to 300; allowed range 50–1000)
+    - Max files to process (defaults to 300; allowed range 50–1000 (effective limit: 1000))
     - Auto-refresh comparison after upload (enable to reload the diff overlay automatically)
     - Force local backup (skip GitHub upload and always download ZIPs locally)
     - Enable debug logging (optional troubleshooting switch that redacts secrets)
