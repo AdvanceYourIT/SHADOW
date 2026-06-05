@@ -10,6 +10,14 @@ Use at your own risk.
 
 ---
 
+## Support
+
+For questions, feedback, or feature requests, please open an issue in this repository or contact the maintainer.
+
+Or visit me in Discord! https://discord.gg/FuS6nTQft
+
+---
+
 ## **Version 1.1.6 released!**
 
 - **Auto backup scheduling (startup check).** When Auto backup is enabled, SHADOW now evaluates backup age at extension startup and runs a full backup if max-age is exceeded.
@@ -173,12 +181,6 @@ Use at your own risk.
 - **NinjaOne administrators** with multiple tenants or environments.
 - **IT teams and MSPs** using version control for scripts.
 - Anyone who wants a fast, reliable, and auditable workflow for automation content in NinjaOne.
-
----
-
-## Support
-
-For questions, feedback, or feature requests, please open an issue in this repository or contact the maintainer.
 
 ---
 
