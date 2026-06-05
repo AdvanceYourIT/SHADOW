@@ -10,12 +10,14 @@ Use at your own risk.
 
 ---
 
-## **Version 1.1.5 released!**
+## **Version 1.1.6 released!**
 
-- **GitHub backup failedFiles response.** Successful GitHub backup uploads now include a `failedFiles` list in the success response (not only counters), allowing the UI to surface exactly which files did not upload.
-- **Actionable partial-upload feedback.** Backup success alerts now list failed files directly (up to 10 entries) and append an '...and X more' line when needed, making partial-upload troubleshooting much faster.
-- **Standardized category handling in compare/sync.** Compare import/update paths now use `resolveCategoriesIds(...)` so existing `categoriesIds` are preserved and fallback category assignment is only used when source categories are missing.
-- **Safer import category behavior.** JSON import no longer blindly overwrites categories with SHADOW; it now normalizes and preserves valid source categories, and only assigns SHADOW when no valid category exists.
+- **Auto backup scheduling (startup check).** When Auto backup is enabled, SHADOW now evaluates backup age at extension startup and runs a full backup if max-age is exceeded.
+- **Auto backup max age control.** Added configurable day threshold to avoid unnecessary backups while enforcing freshness.
+- **Policy Report (Reporting page).** Added a guided reporting flow to select one or more policies, choose report sections, and export printable reports (with optional raw JSON downloads).
+- **Policy Override Audit (Reporting page).** Added a focused override audit overlay to inspect parent/child policy differences and save the full audit as standalone HTML for offline review.
+- **Asset Report (Reporting page).** Added a hardware lifecycle report for managed devices with age buckets, visual summaries, and export options to support refresh planning and audit conversations.
+- **CSP-safe overlay controls.** Updated generated overlay buttons to use script-bound event listeners instead of inline click handlers, preventing Content Security Policy blocks on Cancel/Close and related overlay actions.
 
 ## Features
 
@@ -42,6 +44,9 @@ Use at your own risk.
 <img width="640" height="400" alt="shadowbackup" src="https://github.com/user-attachments/assets/4537e643-213e-46d2-a67b-6fe899ab46c0" />
 
 - **Bulk Policy Assignment** – Apply a monitoring policy to a selected device role across every organisation at once via an overlay that supports progressive loading, select-all toggles, and real-time success/error reporting.
+- **Policy Report** – Generate structured policy documentation from the Reporting page with selectable sections, PDF-friendly output, and optional raw JSON companion exports.
+- **Policy Override Audit** – Launch the Overrides audit from the Reporting page to identify inherited vs overridden values and export results as a self-contained HTML file.
+- **Asset Report** – Open a dedicated asset lifecycle view from the Reporting page that analyzes managed workstation/server inventory by warranty-age buckets, surfaces insights (e.g., old/unknown devices), and provides exportable report output for stakeholder reviews.
 
 <img width="832" height="739" alt="bulkpolicyassignment" src="https://github.com/user-attachments/assets/f2d65b95-35ea-4d99-acae-b0238a17f0b1" />
 
@@ -69,6 +74,7 @@ Use at your own risk.
 | **Administration ▸ Customers ▸ Organization Custom Fields** | Export · Import | Migrate organization-level custom fields between tenants or back them up safely. |
 | **Administration ▸ Customers ▸ Location Custom Fields** | Export · Import | Export or import location-specific custom fields in bulk. |
 | **Administration ▸ Customers ▸ Organizations** | Bulk Policy Assignment | Assign a monitoring policy to a device role for every organization at once. |
+| **Reporting** | SHADOW Policy Report · Overrides · Asset Report | Open the full Policy Report builder, the Policy Override Audit overlay, or the Asset Report overlay. Asset Report shows managed workstation/server age distribution (based on warranty start), highlights aging/unknown assets, and supports export for planning and documentation. |
 | **Device Search** | NinjaRemote Confirmation Audit | Audit Windows workstations where effective Ask Confirmation resolves to false, view Organization/Location plus Effective/Override columns, optionally hide inherited rows, export CSV, and reset selected devices to org defaults. |
 | **Administration ▸ Devices ▸ Roles (Unmanaged)** | Add Unmanaged Devices · Import Unmanaged Devices · Export Unmanaged Devices | Launch the ITAM template overlay to create curated unmanaged roles, import JSON template packs, or export your current unmanaged-role structure for reuse. |
 
@@ -114,6 +120,8 @@ Use at your own risk.
     - (Optional) Path (subfolder in your repo)
     - Max files to process (defaults to 300; allowed range 50–1000 (effective limit: 1000))
     - Auto-refresh comparison after upload (enable to reload the diff overlay automatically)
+    - Auto backup (enable periodic backup checks at extension startup)
+    - Auto backup max age (days)
     - Force local backup (skip GitHub upload and always download ZIPs locally)
     - Enable debug logging (optional troubleshooting switch that redacts secrets)
 3. Click **Test Connection** and review the success banner, then choose **Save Settings** to persist your preferences.
@@ -129,6 +137,8 @@ Use at your own risk.
 | **Path (optional)** | Limits operations to a specific folder within the repository (leave blank for the repo root). |
 | **Max files to process** | Caps GitHub comparison scope (50–1000). Use a lower value for faster diff sessions on large repos. |
 | **Auto-refresh comparison after upload** | When enabled, the GitHub diff overlay reloads automatically after pushing updates. |
+| **Auto backup** | Runs full backup automatically on extension startup when backup age exceeds threshold. |
+| **Auto backup max age (days)** | Maximum allowed backup age before startup auto-backup is triggered. |
 | **Force local backup (skip GitHub upload)** | Overrides uploads and always downloads a ZIP to your machine—ideal for air-gapped backups. |
 | **Test Connection** | Validates the token, repository, and branch before you run exports or backups. |
 | **Save Settings** | Validates and sanitizes GitHub fields before persisting preferences and checkbox selections for future sessions. |
@@ -143,6 +153,7 @@ Use at your own risk.
 - **Audit/Compare:** Compare scripts in NinjaOne with versions in your GitHub repository to identify differences and maintain consistency.
 - **Custom Field Migration:** Export device, organization, or location custom fields from one tenant and import them into another.
 - **Policy Rollout:** Apply a monitoring policy to a device role across every organization with Bulk Policy Assignment.
+- **Asset Lifecycle Review:** Use **Reporting → Asset Report** to quickly spot devices nearing replacement age, identify unknown warranty data, and export the overview for internal planning or customer-facing reports.
 - **ITAM Template Deployment:** Use the unmanaged-device overlays to add curated templates, or import/export JSON packs to keep roles aligned across tenants.
 
 ---
