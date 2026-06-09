@@ -10,22 +10,18 @@ Use at your own risk.
 
 ---
 
-## Support
+## **Version 1.1.7 released!**
 
-For questions, feedback, or feature requests, please open an issue in this repository or contact the maintainer.
-
-Or visit me in Discord! https://discord.gg/FuS6nTQft
-
----
-
-## **Version 1.1.6 released!**
-
-- **Auto backup scheduling (startup check).** When Auto backup is enabled, SHADOW now evaluates backup age at extension startup and runs a full backup if max-age is exceeded.
-- **Auto backup max age control.** Added configurable day threshold to avoid unnecessary backups while enforcing freshness.
-- **Policy Report (Reporting page).** Added a guided reporting flow to select one or more policies, choose report sections, and export printable reports (with optional raw JSON downloads).
-- **Policy Override Audit (Reporting page).** Added a focused override audit overlay to inspect parent/child policy differences and save the full audit as standalone HTML for offline review.
-- **Asset Report (Reporting page).** Added a hardware lifecycle report for managed devices with age buckets, visual summaries, and export options to support refresh planning and audit conversations.
-- **CSP-safe overlay controls.** Updated generated overlay buttons to use script-bound event listeners instead of inline click handlers, preventing Content Security Policy blocks on Cancel/Close and related overlay actions.
+- **Import from Public GitHub (ShadowGitSync).** New Template Library button that updates NinjaOne scripts directly from a raw GitHub URL placed in the script's description (`ShadowGitSync:<url>`), using a preview-first diff overlay and code-only updates that preserve every other field.
+- **Backup choice before sync updates.** Applying a sync update now shows a single dialog with three explicit choices — **Back up, then update**, **Update without backup**, or **Cancel** — and automatically detects when a full backup was already made today so you can skip a redundant one.
+- **New Script Usage overlay.** A single **Script Usage** button on the Automation page shows where each script runs across policies, scheduled tasks, and system tray configurations, and flags scripts that are not referenced anywhere — combining what were previously the separate Used Scripts and Unused Scripts buttons into one view. Improved filtering lets you live-search by name or ID independently on the Used and Unused tabs, with large reference lists collapsed behind expandable summaries.
+- **New Script Manager (Mass Script Management).** A **Script Manager** button on the Automation page opens a single overlay listing every script (metadata only), with live filtering by name/description/ID plus Language, OS, Architecture, and Category. Select scripts (or select-all) and **bulk add or remove a category** in one click — additions never clobber a script's existing categories. An optional **Edit mode** allows inline renaming and description editing, with a guard that warns before a description change would drop a `ShadowGitSync:` marker. Scripts open in a new tab so the filtered view stays put, and native scripts are correctly limited to category-only changes.
+- **Descriptions reserved for sync tags.** Imports and template syncs no longer auto-write or overwrite script descriptions, leaving the field free for the `ShadowGitSync:` tag.
+- **New Custom Field Manager.** A **Custom Field Manager** button on the Device, Organization, and Location Custom Fields pages opens a single filterable table of every custom field and its **Technician / Script / API** permissions. An optional **Edit mode** lets you change those permissions plus each field's description, footer text, and tooltip text inline, then **Apply** writes all pending changes in one batched, throttled pass with automatic MFA detection — every other property of each field is preserved (full-replace per field).
+- **New Import from Private GitHub button.** Alongside **Import from Public GitHub** (the renamed ShadowGitSync button), a new **Import from Private GitHub** button on the Template Library page browses and bulk-imports scripts from your token-authenticated private repository — multi-select with category selection and progress feedback.
+- **New custom-field Usage report.** A **Usage** button on the Device, Organization, and Location Custom Fields pages scans every script's code for custom-field reads/writes (`Get`/`Set-NinjaProperty`, `Ninja-Property-*`, `ninjarmm-cli`, and more) and cross-references them against the defined fields. The two-tab report (By Field / By Script) surfaces defined-but-unused fields, used-but-undefined names, and read/write conflicts with a field's Script permission, with CSV and JSON export.
+- **New Bulk Set Values for organization fields.** A **Bulk Set Values** button on the Organization Custom Fields page sets one organization custom field's value across all or selected organizations at once. It reads each org's current values and writes back only the chosen field — every other value is left untouched — with a type-aware input for text, checkbox, number, date, dropdown, and multi-select fields.
+- **OBVIOUS Template Library phased out.** The OBVIOUS Template Library workflow has been removed this release; curated and version-controlled imports are now handled through the **Import from Public/Private GitHub** buttons.
 
 ## Features
 
@@ -34,20 +30,27 @@ Or visit me in Discord! https://discord.gg/FuS6nTQft
 - **Import Scripts from JSON** – Queue any number of SHADOW exports for re-import, preserve valid source category mappings when present, and only assign the SHADOW category when category data is missing, while skipping unsupported languages and respecting backup guardrails.
 - **Compare with GitHub** – Launch a full-screen diff overlay that progressively loads large libraries (50–1000 files), highlights status buckets, filters results, previews inline diffs, and queues uploads per detected language/extension. JSON uploads now mirror **Backup Now** outputs, preserving script variables/parameters so GitHub exports stay identical to local backups.
 - **Import from GitHub** – Browse the connected repository directly inside NinjaOne, multi-select PS1/SH/BAT/JS/VBS/CMD/JSON assets, choose a destination category (or preserve source categories), and import them in bulk with progress feedback and auto-refresh.
+- **Script Usage** – Open a single overlay that combines the former Used Scripts and Unused Scripts views, revealing where each script runs across policies, scheduled tasks, and system tray configurations, and flagging scripts that are not referenced anywhere so you can retire them safely. Each tab has its own live name/ID filter, and long reference lists collapse behind expandable summaries to keep large libraries readable.
+- **Script Manager (Mass Script Management)** – Open one overlay that lists every script (metadata only — no script body is decoded) for fast, library-wide organization. Filter live by name/description/ID and by Language, OS, Architecture, or Category; select scripts individually or with select-all; then **bulk add or remove a category** across the selection — additions are computed from each script's current categories so they're never overwritten, and a removal that would empty a script falls back to Uncategorized. An optional **Edit mode** enables inline renaming and description editing, with a confirmation guard that protects `ShadowGitSync:` markers. Script names open in a new browser tab so the filter stays open in the original, and native scripts are automatically restricted to category-only changes.
 
 ### Template Library Sync
 - **Compare Templates** – Analyse your environment against the official NinjaOne Template Library, review the remediation list, and optionally apply or skip updates with confirmation prompts.
-- **OBVIOUS Template Library** – Retrieve curated packages from `AdvanceYourIT/SHADOW-Templates`, validate checksums, and import scripts plus related custom fields directly inside NinjaOne using the Operational Bundles of Valuable IT Operations Utility Scripts workflow.
+- **Import from Public GitHub (ShadowGitSync)** – *(formerly the “Sync from GitHub” button — behavior unchanged.)* Keep individual NinjaOne scripts aligned with a third-party GitHub source by storing a raw URL in the script's description (`ShadowGitSync:<url>`). A preview-first overlay scans every tagged script, shows **Up to date / Changed / Error** status with side-by-side diffs, and applies code-only updates (name, categories, parameters, language/OS, and the description tag are all preserved). Before the first update is written, a single dialog lets you choose **Back up, then update**, **Update without backup**, or **Cancel** — and SHADOW notes when a full backup was already made today so you can skip a redundant one.
+- **Import from Private GitHub** – Browse your token-authenticated **private** repository from the Template Library page, multi-select scripts, choose a destination category (or preserve the source categories), and import them in bulk with progress feedback. Configure the Token, Repository, Branch, and Path in the SHADOW popup → **Private Repo** tab first.
 
 ### Custom Fields & Metadata
 - **Device Custom Fields – Export / Import** – Back up device-level metadata or restore field definitions from JSON exports, with per-file validation and backup enforcement.
 - **Organization Custom Fields – Export / Import** – Move customer-specific metadata between tenants and ensure the definitions stay consistent across environments.
 - **Location Custom Fields – Export / Import** – Keep branch/location data aligned by exporting and re-importing standardized definitions with a single click.
+- **Custom Field Manager (Device / Organization / Location)** – Open one filterable table of every custom field for the selected scope and review each field's **Technician**, **Script**, and **API** permission. Switch on **Edit mode** to adjust those permissions plus the description, footer text, and tooltip text inline; **Apply** then submits every pending edit as throttled, MFA-aware writes that perform a full-replace while preserving all other properties of each field — no separate re-fetch needed.
+- **Custom Field Usage (Device / Organization / Location)** – Open the **Usage** button to scan every NinjaOne script's code for custom-field reads and writes (`Get`/`Set-NinjaProperty`, `Ninja-Property-Get/Set/Clear/Options`, the `ninjarmm-cli` get/set forms, and documentation variants) and cross-reference them against the defined fields. A two-tab report (**By Field** / **By Script**) shows which scripts read or write each field, flags defined-but-unused fields, used-but-undefined names, and read/write conflicts with a field's Script permission, and exports to CSV or JSON.
+- **Bulk Set Values (Organization)** – Set one organization custom field value across all or selected organizations at once. SHADOW reads each org's current value records and writes back only the chosen field — every other value is preserved exactly — using a type-aware input for text, checkbox, numeric, date, single-select Dropdown, and Multi-select fields (relational reference types are shown disabled). Includes org search, select-all, and per-org progress with throttled writes.
 
 ### Policy, Backup & Compliance Operations
 - **NinjaRemote Confirmation Audit (Device Search)** – Open the NinjaRemote Confirmation Audit overlay from Device Search to detect workstations where effective remote confirmation resolves to false, review organization/location plus Effective/Override context, optionally hide inherited rows, export CSV findings, and reset selected devices to organization defaults.
 
 - **Backup Now** – Run a full backup from the System Dashboard that collects scripts and custom fields, applies automatic path sanitisation, honours the “force local backup” setting, and uses hardened, rate-limited GitHub writes.
+- **Auto Backup Scheduling** – When Auto backup is enabled, SHADOW checks backup age at extension startup and automatically runs a full backup once it exceeds the configurable max-age threshold, keeping backups fresh without manual effort or redundant runs.
 
 <img width="640" height="400" alt="shadowbackup" src="https://github.com/user-attachments/assets/4537e643-213e-46d2-a67b-6fe899ab46c0" />
 
@@ -76,11 +79,11 @@ Or visit me in Discord! https://discord.gg/FuS6nTQft
 | NinjaOne area | Buttons added by SHADOW | What they do |
 | --- | --- | --- |
 | **System Dashboard ▸ Overview** | Backup Now | Trigger a full backup of scripts and custom fields to GitHub (or force a local ZIP download when configured) with automatic sanitization and hardened GitHub writes. |
-| **Administration ▸ Library ▸ Template Library (Scripting & Automation)** | Compare Templates · OBVIOUS Template Library | Check your tenant against the official Template Library or import curated packs from the public SHADOW Templates repository. |
-| **Administration ▸ Library ▸ Automation** | Download Scripts · Download Scripts (JSON) · Import Scripts from JSON · Compare with GitHub · Unused Scripts · Used Scripts | Export scripts as PowerShell or JSON archives, import JSON exports back into NinjaOne, launch the GitHub diff viewer to audit live vs. version-controlled code, or review where scripts are used (or unused) across policies, scheduled tasks, and system tray configurations. |
-| **Administration ▸ Devices ▸ Device Custom Fields** | Export · Import | Save device custom field definitions to JSON or restore them from a backup. |
-| **Administration ▸ Customers ▸ Organization Custom Fields** | Export · Import | Migrate organization-level custom fields between tenants or back them up safely. |
-| **Administration ▸ Customers ▸ Location Custom Fields** | Export · Import | Export or import location-specific custom fields in bulk. |
+| **Administration ▸ Library ▸ Template Library (Scripting & Automation)** | Compare Templates · Import from Public GitHub · Import from Private GitHub | Check your tenant against the official Template Library, run **Import from Public GitHub** (ShadowGitSync) to update scripts straight from a raw GitHub URL stored in their description — with a preview diff and a back up / skip / cancel choice before any change is written — or use **Import from Private GitHub** to browse and bulk-import scripts from your token-authenticated private repository. |
+| **Administration ▸ Library ▸ Automation** | Download Scripts · Download Scripts (JSON) · Import Scripts from JSON · Compare with GitHub · Script Usage · Script Manager | Export scripts as PowerShell or JSON archives, import JSON exports back into NinjaOne, launch the GitHub diff viewer to audit live vs. version-controlled code, open **Script Usage** — one overlay (replacing the former Used and Unused Scripts buttons) that reviews where scripts are used and which are unused across policies, scheduled tasks, and system tray configurations — or open **Script Manager** for Mass Script Management: list every script, filter by name/description/ID, Language, OS, Architecture, or Category, and bulk add/remove categories (plus optional inline rename and description editing). |
+| **Administration ▸ Devices ▸ Device Custom Fields** | Export · Import · Custom Field Manager · Usage | Save device custom field definitions to JSON or restore them from a backup, open **Custom Field Manager** to review and bulk-edit field permissions (Technician/Script/API) plus description, footer, and tooltip text, or open **Usage** to see which scripts read/write each field. |
+| **Administration ▸ Customers ▸ Organization Custom Fields** | Export · Import · Custom Field Manager · Usage · Bulk Set Values | Migrate organization-level custom fields between tenants or back them up safely, open **Custom Field Manager** to review and bulk-edit permissions and details, open **Usage** to see which scripts read/write each field, or use **Bulk Set Values** to set one field's value across all/selected organizations at once (other values preserved). |
+| **Administration ▸ Customers ▸ Location Custom Fields** | Export · Import · Custom Field Manager · Usage | Export or import location-specific custom fields in bulk, open **Custom Field Manager** to review and bulk-edit permissions and details, or open **Usage** to see which scripts read/write each field. |
 | **Administration ▸ Customers ▸ Organizations** | Bulk Policy Assignment | Assign a monitoring policy to a device role for every organization at once. |
 | **Reporting** | SHADOW Policy Report · Overrides · Asset Report | Open the full Policy Report builder, the Policy Override Audit overlay, or the Asset Report overlay. Asset Report shows managed workstation/server age distribution (based on warranty start), highlights aging/unknown assets, and supports export for planning and documentation. |
 | **Device Search** | NinjaRemote Confirmation Audit | Audit Windows workstations where effective Ask Confirmation resolves to false, view Organization/Location plus Effective/Override columns, optionally hide inherited rows, export CSV, and reset selected devices to org defaults. |
@@ -181,6 +184,12 @@ Or visit me in Discord! https://discord.gg/FuS6nTQft
 - **NinjaOne administrators** with multiple tenants or environments.
 - **IT teams and MSPs** using version control for scripts.
 - Anyone who wants a fast, reliable, and auditable workflow for automation content in NinjaOne.
+
+---
+
+## Support
+
+For questions, feedback, or feature requests, please open an issue in this repository or contact the maintainer.
 
 ---
 
