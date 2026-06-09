@@ -10,6 +10,14 @@ Use at your own risk.
 
 ---
 
+## Support
+
+For questions, feedback, or feature requests, please open an issue in this repository or contact the maintainer.
+
+Or visit me in Discord! https://discord.gg/FuS6nTQft
+
+---
+
 ## **Version 1.1.7 released!**
 
 - **Import from Public GitHub (ShadowGitSync).** New Template Library button that updates NinjaOne scripts directly from a raw GitHub URL placed in the script's description (`ShadowGitSync:<url>`), using a preview-first diff overlay and code-only updates that preserve every other field.
@@ -184,12 +192,6 @@ Use at your own risk.
 - **NinjaOne administrators** with multiple tenants or environments.
 - **IT teams and MSPs** using version control for scripts.
 - Anyone who wants a fast, reliable, and auditable workflow for automation content in NinjaOne.
-
----
-
-## Support
-
-For questions, feedback, or feature requests, please open an issue in this repository or contact the maintainer.
 
 ---
 
