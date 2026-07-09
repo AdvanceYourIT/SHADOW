@@ -14,7 +14,7 @@ Use at your own risk.
 
 For questions, feedback, or feature requests, please open an issue in this repository or contact the maintainer.
 
-Or visit me in Discord! https://discord.gg/FuS6nTQft
+Or visit me in Discord! [https://discord.gg/nY2WUKWn6P](https://discord.gg/nY2WUKWn6P)
 
 ---
 
