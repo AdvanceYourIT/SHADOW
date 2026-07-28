@@ -10,6 +10,14 @@ Use at your own risk.
 
 ---
 
+## Support
+
+For questions, feedback, or feature requests, please open an issue in this repository or contact the maintainer.
+
+Or visit me in Discord! [https://discord.gg/nY2WUKWn6P](https://discord.gg/nY2WUKWn6P)
+
+---
+
 ## **Version 1.1.8 released!**
 
 - **Custom Field Usage — Export HTML.** Alongside the existing **CSV** and **JSON** exports, an **Export HTML** button saves the usage report as a self-contained, shareable HTML file — the summary tiles plus both the **By Field** and **By Script** tables rendered in full, styled to match the in-app overlay.
