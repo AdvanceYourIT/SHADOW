@@ -6,26 +6,26 @@ SHADOW is a Microsoft Edge browser extension that supercharges NinjaOne administ
 
 *Disclaimer: This is a private, independent project and is in no way officially affiliated with, endorsed by, or sponsored by NinjaOne, Inc.*
 
-Use at your own risk.
+SHADOW works by talking to NinjaOne's own internal, undocumented web-app endpoints — the same private routes the NinjaOne web interface itself calls — rather than a published, supported public API. NinjaOne can change, rename, or remove these endpoints at any time without notice, which can break one or more SHADOW features until an update is released. Use at your own risk, and keep the extension up to date.
 
 ---
 
 ## Support
 
-For questions, feedback, or feature requests, please open an issue in this repository or contact the maintainer.
+For questions, feedback, or feature requests, please open an issue in this repository or contact me.
 
 Or visit me in Discord! [https://discord.gg/nY2WUKWn6P](https://discord.gg/nY2WUKWn6P)
 
 ---
 
-## **Version 1.1.10 released!**
+## **Version 1.1.11 released!**
 
-- **Fixed: Compare with GitHub's diff colors were backwards.** In the side-by-side diff overlay, lines that only existed in the NinjaOne version were shown in red with strikethrough (as if being removed), and lines that only existed in the GitHub version were shown in green (as if being added) — the opposite of what **Upload** actually does, since uploading pushes NinjaOne's content to GitHub. NinjaOne-only/changed lines now show green with no strikethrough, and GitHub-only/changed lines show red with strikethrough, matching the real upload direction.
-- **New: Policy Backup to GitHub.** A **Download Policies (JSON)** button on the Administration ▸ Policies page (Agent/NMS/VM/MDM tabs) exports every policy as a JSON ZIP, grouped by device class. **Backup Now** also backs up policies the same way it already backs up scripts and custom fields, adding a `policies/` folder alongside them in both the local ZIP fallback and the GitHub upload — no separate step needed.
-- **New: Compare Policies with GitHub.** A **Compare Policies with GitHub** button on the Administration ▸ Policies page shows a structural, path-by-path diff (not a text diff) between each live NinjaOne policy and its GitHub-backed-up copy, with the same **Select All** / **Upload Selected** / filter-and-search workflow as Compare with GitHub for scripts. Upload only ever writes to GitHub, never back into NinjaOne — by design, unlike script comparison, policy comparison doesn't offer an import-back option. Loading and bulk upload both show a progress bar, since a tenant can have 500+ policies to fetch and diff.
-- **New: choose what Backup Now includes.** Three checkboxes in the SHADOW popup (**Options** tab) — **Scripts**, **Custom Fields**, and **Policies** — control what a full backup actually collects, for both manual **Backup Now** and **Auto Backup**. All three are checked by default, so nothing changes unless you opt a category out; unchecking one skips it entirely rather than just leaving it out of the upload.
-- **New: Azure DevOps as a second, independent sync target.** A new **Azure DevOps** tab in the SHADOW popup (Organization, Project, Repository, Branch, Path, Personal Access Token) connects to an Azure DevOps Git repository alongside your existing GitHub setup — not instead of it. **Compare with Azure DevOps** (Automation page) and **Compare Policies with Azure DevOps** (Policies page) work exactly like their GitHub counterparts, script-for-script and policy-for-policy — same progress bar, filters, diff view, and (for scripts) applying selected changes back into NinjaOne.
-- **New: Backup destination toggle.** **Backup Now** and **Auto Backup** now push to exactly one destination — GitHub or Azure DevOps, chosen with a radio toggle on the **Options** tab — never both at once. Compare with GitHub / Compare with Azure DevOps stay independent of this setting.
+- **New: Technician Permissions Report.** A **Technician Permissions** button on the Reporting page audits every NinjaOne technician role's full permission set as a searchable, category-grouped role × permission matrix — filter, compare roles side by side with diff highlighting, and export the current view as CSV. A **Summary** tab and a **Role Changes** tab (with per-role change cards and best-effort "changed by" attribution from NinjaOne's activity log) round out the report, and **Save Snapshot** records the current state to your GitHub backup repo (in a dedicated `reports/` folder) so later runs can diff against it. Export the full report as a standalone HTML file or straight to PDF. Sysadmin-only by default — enable it for other technicians from **SHADOW-Admin: RBAC Settings**. Layout and interactions are modeled on the standalone, MIT-licensed [ninjaone-technician-permissions-reporter](https://github.com/Icarari/ninjaone-technician-permissions-reporter) project, reimplemented natively so it runs on your already-logged-in NinjaOne session instead of a separate browser login.
+- **New: Technician permissions audit included in the full backup.** **Backup Now** and **Auto Backup** now also collect a technician role-permissions snapshot (into a `technician-permissions/` folder), alongside Scripts, Custom Fields, and Policies — with its own checkbox on the **Options** tab so it can be left out like any other category.
+- **New: Print PDF for Policy Override Audit and Technician Permissions Report.** Both reports previously offered only Save HTML; they now have a **Print PDF** button matching Policy Report and Asset Report, built on a shared print engine so page breaks and margins behave consistently across all four Reporting-page reports. A duplicated "Generated" timestamp on printed Asset Reports is also fixed — it now appears once, not twice. Since the browser adds its own header/footer to anything you print (title, URL, date, page number) and SHADOW can't turn that off, each Print PDF button now notes that you can disable it yourself under "Headers and footers" in the browser's print dialog.
+- **New: Bitbucket Cloud as a third backup destination.** A new **Bitbucket** tab in the SHADOW popup (Access Token, Workspace, Repository, Branch, Path) lets **Backup Now** / **Auto backup** push to a Bitbucket Cloud repository, alongside the existing GitHub and Azure DevOps options — **Backup destination** on the **Options** tab now offers all three, still mutually exclusive. Authentication uses a Bitbucket **Repository Access Token** rather than an App Password, since Bitbucket has fully deprecated those. There's no Compare with Bitbucket yet — it's a backup-only destination for now.
+- **New: NinjaOne US Federal instance support.** SHADOW now activates on `fed.ninjarmm.com`, so NinjaOne's FED-region customers get the full toolset — API base detection was already region-agnostic, so every feature works without further configuration.
+- **Fixed: large backups could silently fail and fall back to a local ZIP.** Backups on large tenants (thousands of scripts/policies) build one giant payload and send it to the background script in a single message; Chrome's content-script-to-background messaging has a size ceiling that call could exceed, failing with an opaque "Could not serialize message" error. Oversized messages are now split into chunks and reassembled before dispatching, so large backups upload correctly instead of quietly falling back to a local download.
 
 ## Features
 
@@ -57,7 +57,7 @@ Or visit me in Discord! [https://discord.gg/nY2WUKWn6P](https://discord.gg/nY2WU
 ### Policy, Backup & Compliance Operations
 - **NinjaRemote Confirmation Audit (Device Search)** – Open the NinjaRemote Confirmation Audit overlay from Device Search, filter by organization (searchable multiselect, defaults to all) and click **Start Scan** to detect workstations where effective remote confirmation resolves to false, review organization/location plus Effective/Override context, optionally hide inherited rows, export CSV findings, and reset selected devices to organization defaults.
 
-- **Backup Now** – Run a full backup from the System Dashboard that collects scripts, policies, and custom fields (each individually toggleable in the popup's **GitHub** tab), applies automatic path sanitisation, honours the “force local backup” setting, and pushes to hardened, rate-limited GitHub or Azure DevOps writes — whichever destination is selected via the **Backup destination** toggle; only one runs per backup, they're never both active at once. The progress card has a **Minimize** button that docks it as a small status pill next to the SHADOW flyout menu (bottom-left) so it doesn't sit blocking the corner of the screen for the whole backup; click the pill to expand it again.
+- **Backup Now** – Run a full backup from the System Dashboard that collects scripts, policies, and custom fields (each individually toggleable in the popup's **GitHub** tab), applies automatic path sanitisation, honours the “force local backup” setting, and pushes to hardened, rate-limited GitHub, Azure DevOps, or Bitbucket writes — whichever destination is selected via the **Backup destination** toggle; only one runs per backup, never more than one active at once. The progress card has a **Minimize** button that docks it as a small status pill next to the SHADOW flyout menu (bottom-left) so it doesn't sit blocking the corner of the screen for the whole backup; click the pill to expand it again.
 - **Auto Backup Scheduling** – When Auto backup is enabled, SHADOW checks backup age at extension startup and automatically runs a full backup once it exceeds the configurable max-age threshold, keeping backups fresh without manual effort or redundant runs.
 
 <img width="640" height="400" alt="shadowbackup" src="https://github.com/user-attachments/assets/4537e643-213e-46d2-a67b-6fe899ab46c0" />
@@ -67,8 +67,15 @@ Or visit me in Discord! [https://discord.gg/nY2WUKWn6P](https://discord.gg/nY2WU
 - **Compare Policies with GitHub** – From the Administration ▸ Policies page, open a structural (path-by-path, not text) diff between each live NinjaOne policy and its GitHub-backed-up copy, with a **View Diff** per changed policy showing exactly which fields differ, **Select All** / **Upload Selected**, search and device-class filters, and a progress bar for both loading and bulk upload since a tenant can have 500+ policies. Upload only ever writes to GitHub, never back into NinjaOne.
 - **Compare Policies with Azure DevOps** – The same structural diff, per-field **View Diff**, filters, and progress bar as Compare Policies with GitHub, against the Azure DevOps repository instead. Push Selected only ever writes to Azure DevOps, never back into NinjaOne — same read-only-toward-NinjaOne design as the GitHub version.
 - **Policy Report** – Generate structured policy documentation from the Reporting page with selectable sections, PDF-friendly output, and optional raw JSON companion exports.
-- **Policy Override Audit** – Launch the Overrides audit from the Reporting page to identify inherited vs overridden values across a policy tree and its devices. Filter by search/category/type, toggle **Hide clean** to drop blocks with no overrides, **Expand/Collapse all** at once, jump to any policy with **Open in NinjaOne**, and export results as a self-contained HTML file.
-- **Asset Report** – Open a dedicated asset lifecycle view from the Reporting page that analyzes managed workstation/server inventory by warranty-age buckets, surfaces insights (e.g., old/unknown devices), and provides exportable report output for stakeholder reviews.
+- **Policy Override Audit** – Launch the Overrides audit from the Reporting page to identify inherited vs overridden values across a policy tree and its devices. Device-level scanning is off by default (policy-level overrides only) since it fetches one config per device in the tree — check **Include device-level overrides** before running to also scan devices, at the cost of a slower run on large tenants. Filter by search/category/type, toggle **Hide clean** to drop blocks with no overrides, **Expand/Collapse all** at once, jump to any policy with **Open in NinjaOne**, and export results as a self-contained HTML file, JSON, CSV, or straight to PDF via **Print PDF**.
+- **Asset Report** – Open a dedicated asset lifecycle view from the Reporting page that analyzes managed workstation/server inventory by warranty-age buckets, surfaces insights (e.g., old/unknown devices), and provides exportable report output — including a **Print PDFs** button that generates one PDF per selected organization — for stakeholder reviews. Narrow the report itself to specific **Organizations** and/or **Devices** via searchable multiselect filters (Devices narrows to whichever organizations are selected); the Hardware Lifecycle Report toggle is available whenever exactly one organization is selected.
+- **Fleet Health Report** – A tenant-wide and per-organization health scorecard from the Reporting page, built from the same aggregate data behind NinjaOne's own System Dashboard: device health, patch and vulnerability status, backup failures, triggered alerts, and fleet composition, with organizations sorted by how much attention they need. Narrow which organizations are shown via a searchable **Organizations** filter (combines with the existing text search); no Devices filter here since the underlying data is aggregate-only, with no per-device rows. Export as a standalone HTML file, CSV, or straight to PDF via **Print PDF**.
+- **Automation Usage Report** – From the Reporting page, see which automations (policy-condition-triggered actions and manually/scheduled-run scripts) ran over a date range, how many times each ran, and success vs. failure counts, with a **By Organization** breakdown sortable by run count, name, or failures, plus a **Recent Failures** list and a live **Queued / Pending Automations** section for automations already dispatched but not yet run on their target device. Narrow the query itself to specific **Organizations** and/or **Devices** via searchable multiselect filters, matching Activities Report's own picker. Switch to **Executive Summary** for a condensed, client-ready view (headline numbers, top automations, per-organization rollup) — unlike the Full Report, it never defaults to showing every organization at once: select the client(s) in the Organizations filter and click Run, since this view is meant to be handed to a specific client. The search box, sort controls, and export buttons all apply to whichever view is currently shown, and Print PDF/Save HTML strip the filter controls so the exported document shows only the results. Export as a standalone HTML file, CSV, or straight to PDF via **Print PDF**.
+- **Technician Permissions Report** – From the Reporting page, audit every technician role's full permission set as a searchable role × permission matrix, save a snapshot to GitHub, and see a **Changes** tab diffing the current state against that snapshot on later runs (who changed what, where activity-log attribution is available). Export as a standalone HTML file, CSV, or straight to PDF via **Print PDF**. Sysadmin-only by default — enable it for other technicians from the **SHADOW-Admin: RBAC Settings** overlay.
+  <br>*Inspired by [ninjaone-technician-permissions-reporter](https://github.com/Icarari/ninjaone-technician-permissions-reporter) (MIT license) — reimplemented natively in SHADOW rather than embedded, since that project is a separate standalone Python/Playwright tool.*
+- **Activities Report** – From the Reporting page, pull the tenant activity log for a minute-precision date/time range and filter by activity type (searchable multiselect — pick multiple types at once) and description text together (e.g. "Automation Completed" + "Software Updated" + description contains "SentinelOne") — combined filtering NinjaOne's own Activities page doesn't offer. Narrow the query itself to specific **Organizations** and/or **Devices** via searchable multiselect filters. Export as a standalone HTML file, CSV, or straight to PDF via **Print PDF**. Sysadmin-only by default — enable it for other technicians from the **SHADOW-Admin: RBAC Settings** overlay.
+
+*A note on PDFs: SHADOW's own report timestamps and layout are print-tuned, but the browser itself also adds its own header/footer (page title, URL, date, page number) to anything you print — that's Edge/Chrome behavior, not something SHADOW can turn off. For a clean PDF, uncheck **Headers and footers** under **More settings** in the print dialog before saving.*
 
 <img width="832" height="739" alt="bulkpolicyassignment" src="https://github.com/user-attachments/assets/f2d65b95-35ea-4d99-acae-b0238a17f0b1" />
 
@@ -93,7 +100,7 @@ Or visit me in Discord! [https://discord.gg/nY2WUKWn6P](https://discord.gg/nY2WU
 - **Fail-safe design** – If the configuration was never saved, or can't be read at all (network error), features fail **open** (nothing restricted) so the extension never silently breaks for the whole team before it's configured. Once a sysadmin has explicitly saved an allowlist — even an empty one — it's enforced literally, restricting anything not on it to sysadmins. If a technician's sysadmin status itself can't be determined, that check fails **closed** (treated as non-sysadmin).
 
 ### Global Coverage & Secure Workflows
-- Works with every NinjaOne domain worldwide (Europe, Canada, Australia, multi-tenant, and more).
+- Works with every NinjaOne domain worldwide (Europe, Canada, Australia, US Federal, multi-tenant, and more).
 - Buttons, overlays, and settings are injected directly in the NinjaOne UI with streamlined refresh handling for a smooth operator experience.
 - All automation respects strict security practices with validated inputs, encrypted credential storage, secure GitHub rate limiting, and migration helpers that remove any legacy plaintext tokens.
 
@@ -101,7 +108,7 @@ Or visit me in Discord! [https://discord.gg/nY2WUKWn6P](https://discord.gg/nY2WU
 
 | NinjaOne area | Buttons added by SHADOW | What they do |
 | --- | --- | --- |
-| **System Dashboard ▸ Overview** | Backup Now | Trigger a full backup of scripts, policies and custom fields to whichever destination is selected in the popup — GitHub or Azure DevOps, never both — or force a local ZIP download when configured, with automatic sanitization and hardened, rate-limited writes. |
+| **System Dashboard ▸ Overview** | Backup Now | Trigger a full backup of scripts, policies and custom fields to whichever destination is selected in the popup — GitHub, Azure DevOps, or Bitbucket, never more than one — or force a local ZIP download when configured, with automatic sanitization and hardened, rate-limited writes. |
 | **Administration ▸ Library ▸ Template Library (Scripting & Automation)** | Compare Templates · Import from Public GitHub · Import from Private GitHub | Check your tenant against the official Template Library, run **Import from Public GitHub** (ShadowGitSync) to update scripts straight from a raw GitHub URL stored in their description — with a preview diff and a back up / skip / cancel choice before any change is written — or use **Import from Private GitHub** to browse and bulk-import scripts from your token-authenticated private repository. |
 | **Administration ▸ Library ▸ Automation** | Download Scripts · Download Scripts (JSON) · Import Scripts from JSON · Compare with GitHub · Compare with Azure DevOps · Script Usage · Script Manager · SHADOW-Admin: RBAC Settings (sysadmin only) | Export scripts as PowerShell or JSON archives, import JSON exports back into NinjaOne, launch the GitHub or Azure DevOps diff viewer to audit live vs. version-controlled code (both can apply selected changes back into NinjaOne), open **Script Usage** — one overlay (replacing the former Used and Unused Scripts buttons) that reviews where scripts are used and which are unused across policies, scheduled tasks, and system tray configurations — or open **Script Manager** for Mass Script Management: list every script, filter by name/description/ID, Language, OS, Architecture, or Category, with a **Categories** tab (bulk add/remove categories, plus optional inline rename and description editing) and a **Script Variables** tab (bulk add/update a script variable by name across selected scripts, with a usage summary that flags naming conflicts). Sysadmin technicians additionally see **SHADOW-Admin: RBAC Settings** to choose which SHADOW features are restricted to sysadmins only. |
 | **Administration ▸ Devices ▸ Device Custom Fields** | Export · Import · Custom Field Manager · Usage | Save device custom field definitions to JSON or restore them from a backup, open **Custom Field Manager** to review and bulk-edit field permissions (Technician/Script/API) plus description, footer, and tooltip text, or open **Usage** to see which scripts read/write each field. |
@@ -109,7 +116,7 @@ Or visit me in Discord! [https://discord.gg/nY2WUKWn6P](https://discord.gg/nY2WU
 | **Administration ▸ Customers ▸ Location Custom Fields** | Export · Import · Custom Field Manager · Usage | Export or import location-specific custom fields in bulk, open **Custom Field Manager** to review and bulk-edit permissions and details, or open **Usage** to see which scripts read/write each field. |
 | **Administration ▸ Customers ▸ Organizations** | Bulk Policy Assignment · Cloud Monitor Tools | Assign a monitoring policy to a device role for every organization at once, or open **Cloud Monitor Tools** to bulk-clone Cloud Monitors across new IP addresses (from an existing monitor or built from scratch) or move existing Cloud Monitors to a different organization. |
 | **Administration ▸ Policies** (Agent/NMS/VM/MDM tabs) | Download Policies (JSON) · Compare Policies with GitHub · Compare Policies with Azure DevOps | Export every policy as a JSON ZIP grouped by device class, or launch a structural (path-by-path) diff between live NinjaOne policies and their GitHub- or Azure DevOps-backed-up copies, with **Select All** / **Upload Selected** (or **Push Selected**), a **View Diff** per changed field, filters, and a progress bar for large policy counts. Both only ever write to GitHub/Azure DevOps — by design, policy comparison has no import-back-into-NinjaOne option (unlike script comparison). |
-| **Reporting** | SHADOW Policy Report · Overrides · Asset Report | Open the full Policy Report builder, the Policy Override Audit overlay, or the Asset Report overlay. Asset Report shows managed workstation/server age distribution (based on warranty start), highlights aging/unknown assets, and supports export for planning and documentation. |
+| **Reporting** | SHADOW Policy Report · Overrides · Asset Report · Fleet Health · Automation Usage · Technician Permissions · Activities | Open the full Policy Report builder, the Policy Override Audit overlay, the Asset Report overlay, the Fleet Health Report, the Automation Usage Report, the Technician Permissions Report, or the Activities Report. Asset Report shows managed workstation/server age distribution (based on warranty start), highlights aging/unknown assets, and supports export for planning and documentation. Fleet Health Report shows a per-organization scorecard (device health, patches, vulnerabilities, backups, alerts) from NinjaOne's own dashboard data. Automation Usage Report shows run counts and success/failure rates per automation over a date range, plus currently-queued automations. Technician Permissions Report shows a role × permission matrix with GitHub-backed change tracking; sysadmin-only until enabled via RBAC Settings. Activities Report filters the tenant activity log by type and description text together over a date range; sysadmin-only until enabled via RBAC Settings. |
 | **Device Search** | NinjaRemote Confirmation Audit · Run Script Now | Audit Windows workstations where effective Ask Confirmation resolves to false, view Organization/Location plus Effective/Override columns, optionally hide inherited rows, export CSV, and reset selected devices to org defaults. **Run Script Now** opens a wizard to pick organizations/devices, paste a PowerShell script, and run it once on the selected Windows devices — without saving it to the script library. |
 | **Device Dashboard (individual device page)** | Run Script Now | Same ad-hoc PowerShell runner as Device Search, pre-scoped to the device you're viewing — paste a script and run it once on just that device. |
 | **Administration ▸ Devices ▸ Roles (Unmanaged)** | Add Unmanaged Devices · Import Unmanaged Devices · Export Unmanaged Devices | Launch the ITAM template overlay to create curated unmanaged roles, import JSON template packs, or export your current unmanaged-role structure for reuse. |
@@ -193,6 +200,37 @@ Azure DevOps runs alongside GitHub, not instead of it — connect it if you want
 3. Click **Test Connection** and review the success banner, then choose **Save Settings** to persist your preferences.
 4. If you also want Azure DevOps to be the target for **Backup Now** / **Auto backup** (instead of GitHub), switch to the **Options** tab (the first tab in the popup) and set **Backup destination** to Azure DevOps — the two destinations are mutually exclusive, so only one is ever the active backup target. **Compare with Azure DevOps** and **Compare Policies with Azure DevOps** work independently of this choice either way.
 
+### 4. Connect SHADOW to Your Bitbucket Repository (optional, extra sync target)
+
+Bitbucket runs alongside GitHub and Azure DevOps, not instead of them — connect it if you want another place backups sync to, or if Bitbucket is your primary source control. Skip this section entirely if you don't use Bitbucket. Unlike GitHub/Azure DevOps, there's no Compare with Bitbucket yet — it's a backup (push-only) destination for now.
+
+#### **Step 1: Create (or choose) a Repository in Bitbucket**
+
+1. Log in to [Bitbucket](https://bitbucket.org).
+2. Open (or create) the repository you want SHADOW to back up to (e.g., `ninjaone-scripts`).
+
+#### **Step 2: Create a Bitbucket Repository Access Token**
+
+1. Open the repository in Bitbucket, then go to **Repository settings** → **Access tokens**.
+2. Click **Create access token**.
+3. Name it (e.g., `SHADOW Extension`).
+4. Under **Permissions**, enable **Repositories: Write**.
+5. Click **Create** and copy the token securely (you won't see it again).
+
+> **Bitbucket App Passwords are deprecated — use a Repository Access Token instead.** Bitbucket also offers Workspace Access Tokens, but those require a Bitbucket Cloud **Premium** subscription. A Repository Access Token works on every plan, and is also the more narrowly-scoped, least-privilege option since it's tied to just the one repository rather than every repository in the workspace.
+
+#### **Step 3: Enter Your Bitbucket Details in SHADOW**
+
+1. Click the SHADOW extension icon in Edge, and switch to the **Bitbucket** tab.
+2. Fill in:
+    - **Access Token**
+    - Workspace (the first segment of your repo's URL: `bitbucket.org/<workspace>/<repo>`)
+    - Repository (the second segment — the repo slug)
+    - Branch (e.g., `main`)
+    - (Optional) Path (subfolder in your repo)
+3. Click **Test Connection** and review the success banner, then choose **Save Settings** to persist your preferences.
+4. If you want Bitbucket to be the target for **Backup Now** / **Auto backup**, switch to the **Options** tab and set **Backup destination** to Bitbucket — GitHub, Azure DevOps, and Bitbucket are mutually exclusive as backup targets, so only one is ever active.
+
 ## Extension Popup Settings
 
 The popup opens on the **Options** tab by default. It holds everything that
@@ -205,8 +243,8 @@ saves each setting immediately rather than behind a "Save Settings" button.
 
 | Control | Purpose |
 | --- | --- |
-| **Backup destination (GitHub / Azure DevOps)** | Chooses which one **Backup Now** / **Auto backup** pushes to — the two are mutually exclusive, never both at once. Defaults to GitHub. Compare with GitHub / Compare with Azure DevOps are unaffected by this setting. |
-| **Backup Now includes** (Scripts / Custom fields / Policies) | Unchecking a category leaves it out of both the local ZIP and the GitHub/Azure DevOps upload the next time Backup Now (or Auto backup) runs. All three default to checked. |
+| **Backup destination (GitHub / Azure DevOps / Bitbucket)** | Chooses which one **Backup Now** / **Auto backup** pushes to — only one is ever active at a time. Defaults to GitHub. Compare with GitHub / Compare with Azure DevOps are unaffected by this setting (there's no Compare with Bitbucket yet). |
+| **Backup Now includes** (Scripts / Custom fields / Policies / Technician permissions audit) | Unchecking a category leaves it out of both the local ZIP and the GitHub/Azure DevOps upload the next time Backup Now (or Auto backup) runs. All four default to checked. |
 | **Force local backup (skip remote upload)** | Overrides uploads and always downloads a ZIP to your machine — ideal for air-gapped backups — instead of uploading to the backup destination above. |
 | **Auto backup** | Runs full backup automatically on extension startup when backup age exceeds the threshold below. |
 | **Auto backup max age (days)** | Maximum allowed backup age before startup auto-backup is triggered. |
@@ -215,8 +253,8 @@ saves each setting immediately rather than behind a "Save Settings" button.
 | **Enable debug logging** | Toggles additional console diagnostics (with secrets redacted). |
 
 Every control on this tab saves immediately on change — there's no "Save
-Settings" button here, and none of them require a GitHub or Azure DevOps
-connection to already be configured.
+Settings" button here, and none of them require a GitHub, Azure DevOps, or
+Bitbucket connection to already be configured.
 
 ### GitHub tab
 
@@ -242,6 +280,18 @@ connection to already be configured.
 | **Path (optional)** | Limits operations to a specific folder within the repository (leave blank for the repo root). |
 | **Test Connection** | Validates the PAT, organization, project, and repository before you run comparisons or backups. |
 | **Save Settings** | Persists the Azure DevOps connection details for future sessions. |
+
+### Bitbucket tab
+
+| Control | Purpose |
+| --- | --- |
+| **Access Token** | A Bitbucket Repository Access Token (Workspace Access Tokens are also accepted, but require Bitbucket Cloud Premium), stored encrypted with AES-GCM, the same way the GitHub token is. |
+| **Workspace** | The Bitbucket workspace slug — the first segment of `bitbucket.org/<workspace>/<repo>`. |
+| **Repository** | The repository slug — the second segment of that same URL. |
+| **Branch** | Defaults to `main`, but can target any branch that contains your automation assets. |
+| **Path (optional)** | Limits operations to a specific folder within the repository (leave blank for the repo root). |
+| **Test Connection** | Validates the token, workspace, and repository before you run backups. |
+| **Save Settings** | Persists the Bitbucket connection details for future sessions. |
 
 ### Private GitHub tab
 
@@ -282,7 +332,7 @@ backups or comparisons, and stored separately from the GitHub tab's token.
 
 ## Security
 
-- GitHub tokens and the Azure DevOps PAT are AES-GCM encrypted in the extension's local storage rather than kept as plaintext, each under its own storage key, and are only ever decrypted inside the background service worker — the NinjaOne page, its own scripts, and SHADOW's page-side modules never see the token value itself. (As with any browser extension, this protects against casual inspection, not against something that already has the same level of access as the extension itself — there's no OS keychain available to extensions to go further than that.)
+- GitHub tokens, the Azure DevOps PAT, and the Bitbucket access token are AES-GCM encrypted in the extension's local storage rather than kept as plaintext, each under its own storage key, and are only ever decrypted inside the background service worker — the NinjaOne page, its own scripts, and SHADOW's page-side modules never see the token value itself. (As with any browser extension, this protects against casual inspection, not against something that already has the same level of access as the extension itself — there's no OS keychain available to extensions to go further than that.)
 - Messages that reach the GitHub/token-handling background code are authenticated with a per-page-load token embedded only in SHADOW's own injected script, so a forged message from any other script running on the page is rejected before it can reach the background service worker.
 - Strict permissions and hardened content security policy by default.
 - All user inputs—including repository names, folder selections, and file paths—are sanitized before any GitHub call is attempted.
@@ -307,6 +357,14 @@ For questions, feedback, or feature requests, please open an issue in this repos
 
 ---
 
+## Credits
+
+SHADOW got its start from a PowerShell script by [David Spzunar](https://github.com/dszp), which grew into this extension.
+
+The Technician Permissions Report's layout and interactions are modeled on [ninjaone-technician-permissions-reporter](https://github.com/Icarari/ninjaone-technician-permissions-reporter) by Kevin Icart (MIT license), reimplemented natively in SHADOW so it runs on your already-logged-in NinjaOne session instead of a separate browser login.
+
+---
+
 *Disclaimer: This is a private, independent project and is in no way officially affiliated with, endorsed by, or sponsored by NinjaOne, Inc.*
 
-Use at your own risk.
+SHADOW works by talking to NinjaOne's own internal, undocumented web-app endpoints — the same private routes the NinjaOne web interface itself calls — rather than a published, supported public API. NinjaOne can change, rename, or remove these endpoints at any time without notice, which can break one or more SHADOW features until an update is released. Use at your own risk, and keep the extension up to date.
