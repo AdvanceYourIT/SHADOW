@@ -1,6 +1,6 @@
 # SHADOW – Stealthy Handler for Automated Data Optimization and Workflow
 
-SHADOW is a Microsoft Edge browser extension that supercharges NinjaOne administrators with powerful, secure tools for managing, comparing, and migrating scripts and monitoring policies. SHADOW integrates directly into the NinjaOne web interface and connects seamlessly with your private GitHub repository for version control and change auditing.
+SHADOW is a browser extension for Microsoft Edge and Google Chrome that supercharges NinjaOne administrators with powerful, secure tools for managing, comparing, and migrating scripts and monitoring policies. SHADOW integrates directly into the NinjaOne web interface and connects seamlessly with your private GitHub repository for version control and change auditing.
 
 <img width="128" height="128" alt="shadow_128x128" src="https://github.com/user-attachments/assets/5f28a902-69eb-47b7-86d0-d0263103a35b" />
 
@@ -139,7 +139,8 @@ Or visit me in Discord! [https://discord.gg/nY2WUKWn6P](https://discord.gg/nY2WU
 ### 1. Installation
 
 - [**Download SHADOW from the Microsoft Edge Add-ons Store**](https://microsoftedge.microsoft.com/addons/detail/shadow/kalnkhmddnjjdakhccjinkneidcbnmak)
-- Open NinjaOne in Microsoft Edge and ensure the SHADOW icon appears in your browser bar.
+- [**Download SHADOW from the Chrome Web Store**](https://chromewebstore.google.com/detail/shadow/lopnlcijjhokpejdphcpmbimfjffnaej)
+- Open NinjaOne in Microsoft Edge or Google Chrome and ensure the SHADOW icon appears in your browser bar.
 
 ### 2. Connect SHADOW to Your GitHub Repository
 
