@@ -2,7 +2,7 @@
 
 SHADOW is a browser extension for Microsoft Edge and Google Chrome that supercharges NinjaOne administrators with powerful, secure tools for managing, comparing, and migrating scripts and monitoring policies. SHADOW integrates directly into the NinjaOne web interface and connects seamlessly with your private GitHub repository for version control and change auditing.
 
-<img width="128" height="128" alt="shadow_128x128" src="https://github.com/user-attachments/assets/5f28a902-69eb-47b7-86d0-d0263103a35b" />
+<img width="128" height="128" alt="shadow_128x128" src="https://github.com/user-attachments/assets/7b65a2fc-019e-488b-9941-6e703f60d0bb" />
 
 *Disclaimer: This is a private, independent project and is in no way officially affiliated with, endorsed by, or sponsored by NinjaOne, Inc.*
 
