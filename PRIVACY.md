@@ -1,13 +1,13 @@
 # Privacy Policy — SHADOW
 
 **Publisher:** Advance Your IT
-**Product:** SHADOW (browser extension for Microsoft Edge and Google Chrome)
+**Product:** SHADOW (browser extension for Microsoft Edge, Google Chrome and Mozilla Firefox)
 **Last updated:** October 8, 2026
 **Contact:** shadow@advanceyourit.nl
 
 ## 1. Overview
 
-SHADOW is an administrative productivity extension for Microsoft Edge and Google Chrome that extends the NinjaOne RMM (Remote Monitoring and Management) web console with in-page tools for exporting/importing scripts and custom fields, comparing and syncing data with a user-configured GitHub, Azure DevOps, or Bitbucket Cloud repository, running backup/compliance workflows, and generating policy/asset reports. SHADOW is an independent, community-built tool and is not affiliated with or endorsed by NinjaOne, Microsoft, Google, GitHub, Atlassian, or Azure DevOps.
+SHADOW is an administrative productivity extension for Microsoft Edge, Google Chrome and Mozilla Firefox that extends the NinjaOne RMM (Remote Monitoring and Management) web console with in-page tools for exporting/importing scripts and custom fields, comparing and syncing data with a user-configured GitHub, Azure DevOps, or Bitbucket Cloud repository, running backup/compliance workflows, and generating policy/asset reports. SHADOW is an independent, community-built tool and is not affiliated with or endorsed by NinjaOne, Microsoft, Google, GitHub, Atlassian, or Azure DevOps.
 
 SHADOW is designed to operate entirely within the user's own NinjaOne tenant and the third-party services the user explicitly configures. It does not send data to Advance Your IT or to any server operated by the publisher, and it contains no analytics, telemetry, or advertising code.
 
