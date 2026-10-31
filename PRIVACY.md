@@ -2,7 +2,7 @@
 
 **Publisher:** Advance Your IT
 **Product:** SHADOW (browser extension for Microsoft Edge, Google Chrome and Mozilla Firefox)
-**Last updated:** October 8, 2026
+**Last updated:** November 1, 2026
 **Contact:** shadow@advanceyourit.nl
 
 ## 1. Overview
