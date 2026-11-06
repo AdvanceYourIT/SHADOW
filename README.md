@@ -18,6 +18,15 @@ Or visit me in Discord! [https://discord.gg/nY2WUKWn6P](https://discord.gg/nY2WU
 
 ---
 
+## **Version 1.1.19 released!**
+
+- **Fixed: Azure DevOps backups of very large tenants no longer fail on "The maximum request size of 26214400 bytes was exceeded".** Azure DevOps refuses a push request over 25 MiB, and the request is bigger than the files themselves because quotes and line breaks of the JSON files are escaped, so one big batch of policies could not be pushed and the backup fell back to a local ZIP. A big set of files is now pushed in several pushes that stay under the limit, one commit each with "(part 2 of 3)" in the commit message. If a later part fails, the error says how many parts were already pushed. Small backups still produce one commit.
+- **Fixed: backups of very large tenants use far less memory in the NinjaOne tab.** The collected backup (scripts, policies, custom field values) is now kept outside the page's own memory and only the part that is being uploaded is read back, and policies are no longer all kept as parsed data until the end. In a test with 650 MB of backup files the tab's memory use went from about 712 MB to about 169 MB. The local ZIP fallback is unchanged.
+- **Fixed: a request that was answered right away no longer logs a false "Request timeout" half a minute later.** The timeout is now cleared as soon as the answer is in. The old timeout also kept the data of that request in memory until it ran out, up to 30 minutes, which worked against the memory saving above for big backups.
+- **New: Last backup log.** While a backup runs, SHADOW keeps its progress in the extension: the log lines, the current phase (for example "policies 212 of 400" or "uploading part 7 of 23"), and every 5 seconds the memory use of the NinjaOne tab (Edge and Chrome). Options > Debug > Last backup log shows it live, with Refresh, Copy and Clear. It is recorded for every backup, also with debug logging off, and it is still there after the NinjaOne tab crashed, which the console and DevTools are not. A backup that stopped reporting is flagged as a probable crash with the phase it was in. Copy it and send it along when a backup fails.
+
+---
+
 ## **Version 1.1.18 released!**
 
 - **Fixed: Compare with Azure DevOps shows how far it is.** A repository is read one file at a time, which takes minutes for a few hundred files, and the screen used to stay on "Fetching Azure DevOps files" without any sign of life. It now says what it is doing (listing the repository, how many script files it found in your Path, and "120 of 231" while it reads them) and the progress bar moves along.
@@ -258,6 +267,7 @@ saves each setting immediately rather than behind a "Save Settings" button.
 | **Script editor on right** | Off = default left, On = custom right-side placement for the NinjaOne script editor. |
 | **Buttons** | One checkbox per SHADOW button/overlay, grouped by page — unchecking one hides it from NinjaOne immediately on open tabs. Sysadmin-only features (per the RBAC allowlist) don't appear here for non-sysadmin technicians. |
 | **Enable debug logging** | Toggles additional console diagnostics (with secrets redacted). |
+| **Last backup log** | Shows the log of the last backup (progress, current phase, and the memory use of the NinjaOne tab every 5 seconds), with Refresh, Copy and Clear. Recorded for every backup, also with debug logging off, and kept in the extension, so it is still there after the NinjaOne tab crashed. |
 
 Every control on this tab saves immediately on change — there's no "Save
 Settings" button here, and none of them require a GitHub, Azure DevOps, or
