@@ -27,14 +27,6 @@ Or visit me in Discord! [https://discord.gg/nY2WUKWn6P](https://discord.gg/nY2WU
 
 ---
 
-## **Version 1.1.18 released!**
-
-- **Fixed: Compare with Azure DevOps shows how far it is.** A repository is read one file at a time, which takes minutes for a few hundred files, and the screen used to stay on "Fetching Azure DevOps files" without any sign of life. It now says what it is doing (listing the repository, how many script files it found in your Path, and "120 of 231" while it reads them) and the progress bar moves along.
-- **Fixed: Compare with Azure DevOps no longer drops files without telling you.** When Azure DevOps is busy or throttling (HTTP 429, 500, 502, 503, 504) or the connection drops, a file is tried again up to four times, waiting as long as Azure DevOps asks. A file that still cannot be read stops the comparison with a clear message instead of silently going missing, which made a script look as if it were not in the repository.
-- **Fixed: a script whose name contains characters that are not allowed in a file name (such as a double quote) is paired with its backup file in Compare with GitHub, Azure DevOps and Bitbucket.** The backup writes such a character as a dash while the comparison turned it into an underscore, so the same script showed up twice, once as "only in NinjaOne" and once as "only in the repository". When that happens, the two are now paired by name with punctuation ignored, but only when the pairing is unambiguous.
-
----
-
 ## Features
 
 ### Script & GitHub Automation
