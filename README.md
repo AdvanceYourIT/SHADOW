@@ -24,12 +24,6 @@ Or visit me in Discord! [https://discord.gg/nY2WUKWn6P](https://discord.gg/nY2WU
 - **New: Reset Run Once flag (bulk) on Device Search.** Pick organizations, then either scan their Windows devices and choose one schedule and its devices, or enter a known schedule UID and reset it on all Windows devices of those organizations without scanning, which suits very large tenants. Jobs start in batches, a confirmation comes first, and above 100 devices you type the device count to confirm.
 - **New: Clean up Run Once flags on Device Search.** The NinjaOne agent never removes the Run Once entries of schedules that were deleted. The cleanup first shows a read-only overview of those leftover entries per device (nothing is changed or restarted), and only removes the ones you select after a confirmation. Each device checks again that an entry is still unused before removing it, and the agent is stopped and started around the edit. There is no device limit, the activity feed is read incrementally.
 
-## **Version 1.2.0 released!**
-
-- **New: Tag Usage report.** From the Reporting page, Tag Usage shows where every NinjaOne device tag is used: in scripts (Set-NinjaTag, Remove-NinjaTag, Get-NinjaTag and Options-NinjaTag, with the line), in the Device tag conditions of the target rules that dynamic policies use (with the dynamic policies each rule is assigned to), and in saved device searches. Tags nothing uses are listed as Unused, tag names that do not exist as Not defined, and tag names a script builds at run time are listed separately. Dynamic policies are an add-on in NinjaOne: without it the report leaves that part out. Export as HTML, CSV, JSON or Markdown.
-- **New: Push Selected updates GitHub scripts in subfolders.** A script that already lives in a subfolder under the repository folder (Path) is now updated in place instead of being created again in the Path folder, as Azure DevOps and Bitbucket already did. New scripts go directly in the Path folder.
-- **Improved: the Path setting is clearer and more forgiving.** It is now called "Folder to compare (optional)" with an example (MSPNXT/Test) and a help text: Compare and Import read that folder and all its subfolders, and Backup Now does not use it. Bitbucket now ignores capitals and extra slashes in the folder, like GitHub and Azure DevOps. If the folder does not exist or holds no script files, the comparison shows a message (with the folders that do exist) instead of an empty result.
-
 ---
 
 ## Features
